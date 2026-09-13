@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &amp; Order Tracking — Inkwell &amp; Ivy</title>
+  <meta name="description" content="Questions about an order or a custom idea? Get in touch with the Inkwell & Ivy studio." />
+  <meta name="theme-color" content="#6b1d2f" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div id="layout-top"></div>
+  <main>
+    <header class="page-head"><h1>Get in Touch</h1><p>Questions about an order, a shipment, or a custom idea? We'd love to hear from you.</p></header>
+
+    <section class="section" style="padding-top:2rem">
+      <form class="form-card" id="contactForm" novalidate>
+        <div class="form-row">
+          <label class="field"><span class="field-label">Name <span class="req">*</span></span>
+            <input type="text" name="name" required placeholder="Your name" /></label>
+          <label class="field"><span class="field-label">Email <span class="req">*</span></span>
+            <input type="email" name="email" required placeholder="you@email.com" /></label>
+        </div>
+        <label class="field"><span class="field-label">Order number (optional)</span>
+          <input type="text" name="order" placeholder="e.g. II-10245" /></label>
+        <label class="field"><span class="field-label">Message <span class="req">*</span></span>
+          <textarea name="message" required maxlength="1000" placeholder="How can we help?"></textarea></label>
+        <button class="btn btn-primary btn-block" type="submit">Send Message</button>
+        <p class="form-note" id="cError" style="color:var(--burgundy);display:none"></p>
+      </form>
+
+      <div class="form-card form-success" id="cSuccess">
+        <div class="big">✦</div>
+        <h2>Message received</h2>
+        <p style="color:var(--muted);margin:0.6rem auto 1.2rem">Thank you — we'll reply within 1–2 business days.</p>
+        <a class="btn btn-ghost" href="index.html">Back home</a>
+      </div>
+
+      <p style="text-align:center;color:var(--muted);margin-top:2rem">
+        Prefer email? <a href="mailto:hello@inkwellandivy.example" style="color:var(--burgundy);font-weight:600">hello@inkwellandivy.example</a>
+      </p>
+    </section>
+  </main>
+  <div id="layout-bottom"></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/layout.js"></script>
+  <script>
+    (function () {
+      var form = document.getElementById("contactForm");
+      var ok = document.getElementById("cSuccess");
+      var err = document.getElementById("cError");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        err.style.display = "none";
+        var d = Object.fromEntries(new FormData(form).entries());
+        if (!d.name.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email || "") || !d.message.trim()) {
+          err.textContent = "Please add your name, a valid email, and a message.";
+          err.style.display = "block";
+          return;
+        }
+        try {
+          var all = JSON.parse(localStorage.getItem("inkwell_contact_v1")) || [];
+          all.push(Object.assign(d, { at: new Date().toISOString() }));
+          localStorage.setItem("inkwell_contact_v1", JSON.stringify(all));
+        } catch (_) {}
+        form.style.display = "none";
+        ok.classList.add("show");
+      });
+    })();
+  </script>
+</body>
+</html>
