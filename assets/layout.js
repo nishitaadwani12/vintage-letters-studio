@@ -70,7 +70,7 @@
           <a href="cart.html">Cart &amp; Checkout</a>
         </div>
       </div>
-      <p class="footer-copy">© 2026 Asli Tohfa · Handcrafted with care · Prototype site</p>
+      <p class="footer-copy">© 2026 Asli Tohfa · Handcrafted with care</p>
     </footer>`;
 
   const drawer = `
