@@ -1,4 +1,4 @@
-// Product catalog + shared config for Inkwell & Ivy.
+// Product catalog + shared config for Asli Tohfa.
 // Prices in INR. `emoji` stands in for product photography in this prototype.
 window.INKWELL = window.INKWELL || {};
 
@@ -8,7 +8,7 @@ window.INKWELL.CATEGORIES = [
   { slug: "boxes", name: "Interactive Gift Boxes & Jars", emoji: "🎁", accent: "#d4af37" },
 ];
 
-window.INKWELL.OCCASIONS = ["Anniversary", "Long Distance", "Birthday", "Just Because"];
+window.INKWELL.OCCASIONS = ["Anniversary", "Wedding", "Long Distance", "Birthday", "New Baby", "Just Because"];
 
 window.INKWELL.PRODUCTS = [
   {
@@ -156,6 +156,73 @@ window.INKWELL.PRODUCTS = [
     customizable: true,
     blurb: "A layered unboxing: letter, flowers, wax seal & keepsake.",
     desc: "A curated wooden box that unfolds in layers - a sealed letter, a pressed-flower mini bouquet, and a keepsake trinket, staged for a filmable unboxing.",
+  },
+  {
+    id: "wedding-vow-keepsake",
+    name: "Wedding Vow Keepsake Frame",
+    category: "flowers",
+    occasions: ["Wedding", "Anniversary"],
+    price: 1899,
+    emoji: "💍",
+    bestseller: true,
+    customizable: true,
+    blurb: "Your vows, hand-lettered and framed with your wedding flowers.",
+    desc: "We hand-letter your vows onto aged paper, mount them with pressed flowers from your palette, and frame it in solid wood. Add a QR of your first-dance song to keep the day alive.",
+  },
+  {
+    id: "365-days-of-us-jar",
+    name: "365 Days of Us Jar",
+    category: "boxes",
+    occasions: ["Anniversary", "Just Because"],
+    price: 2499,
+    emoji: "📆",
+    customizable: true,
+    blurb: "A note for every day of the year, sealed in a keepsake jar.",
+    desc: "A full year of hand-rolled, wax-tied notes in a large apothecary jar - one to open each day. Our most heartfelt slow-gift, written from your prompts and memories.",
+  },
+  {
+    id: "scratch-date-night-box",
+    name: "Scratch-to-Reveal Date Night Box",
+    category: "boxes",
+    occasions: ["Anniversary", "Birthday", "Just Because"],
+    price: 1099,
+    emoji: "🎟️",
+    customizable: true,
+    blurb: "Hand-made scratch cards hiding surprise dates and notes.",
+    desc: "A set of aged scratch-off cards, each concealing a date idea, a memory, or a love note you choose. Interactive, playful, and endlessly re-openable.",
+  },
+  {
+    id: "where-we-met-map",
+    name: "\"Where We Met\" Pressed Map",
+    category: "flowers",
+    occasions: ["Anniversary", "Long Distance"],
+    price: 1699,
+    emoji: "🗺️",
+    customizable: true,
+    blurb: "A hand-illustrated map of your place, pressed with flowers.",
+    desc: "Tell us the spot your story began and we hand-mark it on an antiqued map, press local-style blooms around it, and frame it with your date and note.",
+  },
+  {
+    id: "newborn-keepsake-letter",
+    name: "Newborn Welcome Keepsake",
+    category: "letters",
+    occasions: ["New Baby", "Just Because"],
+    price: 999,
+    emoji: "🍼",
+    customizable: true,
+    blurb: "A first letter to a new arrival, sealed to open one day.",
+    desc: "A hand-lettered welcome letter with the baby's name, birth details, and your words - wax-sealed to be kept and opened on a future birthday. A heirloom from day one.",
+  },
+  {
+    id: "remembrance-letter",
+    name: "Remembrance Keepsake Letter",
+    category: "letters",
+    occasions: ["Just Because"],
+    price: 899,
+    customizable: true,
+    emoji: "🕊️",
+    blurb: "A gentle, hand-lettered tribute to someone dearly missed.",
+    desc: "A quietly beautiful keepsake letter honoring a loved one - your words, hand-lettered on soft paper and sealed with care. A tender way to hold a memory close.",
   },
 ];
 

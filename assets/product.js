@@ -11,7 +11,7 @@
     pdp.innerHTML = '<p class="no-results">Sorry, we couldn\'t find that item. <a href="shop.html">Back to the shop →</a></p>';
     return;
   }
-  document.title = product.name + " - Inkwell & Ivy";
+  document.title = product.name + " - Asli Tohfa";
 
   if (!product.customizable) {
     renderSimple();

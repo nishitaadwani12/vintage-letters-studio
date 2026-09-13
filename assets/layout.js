@@ -33,7 +33,7 @@
   const nav = `
     <header class="nav" id="nav">
       <a class="brand" href="index.html">
-        <span class="brand-mark">✦</span><span class="brand-name">Inkwell&nbsp;&amp;&nbsp;Ivy</span>
+        <span class="brand-mark">✦</span><span class="brand-name">Asli&nbsp;Tohfa</span>
       </a>
       <nav class="nav-links">
         <a href="shop.html">Shop</a>
@@ -53,7 +53,7 @@
     <footer class="footer">
       <div class="footer-grid">
         <div>
-          <span class="brand-name">Inkwell &amp; Ivy</span>
+          <span class="brand-name">Asli Tohfa</span>
           <p class="footer-tag">A handmade sentimental gifting studio - reviving the lost art of letter writing.</p>
         </div>
         <div>
@@ -70,7 +70,7 @@
           <a href="cart.html">Cart &amp; Checkout</a>
         </div>
       </div>
-      <p class="footer-copy">© 2026 Inkwell &amp; Ivy · Handcrafted with care · Prototype site</p>
+      <p class="footer-copy">© 2026 Asli Tohfa · Handcrafted with care · Prototype site</p>
     </footer>`;
 
   const drawer = `

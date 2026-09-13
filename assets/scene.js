@@ -1,130 +1,109 @@
-// 3D hero: a single sheet of letter paper floating with a gentle curl and a
-// hand-pressed wax seal, drifting fine particles, soft cinematic lighting.
-// Restrained + modern. Gracefully no-ops if WebGL is unavailable.
+// Asli Tohfa — elegant vintage hero.
+// A glowing gold-dust particle field with soft depth, a slowly turning wax-seal
+// medallion (monogram अ), warm cinematic tone-mapping and UnrealBloom glow.
+// Gracefully degrades: no bloom if addons fail, hidden entirely if WebGL is out.
 import * as THREE from "three";
 
 const canvas = document.getElementById("scene");
 if (canvas) {
-  try { initScene(canvas); }
-  catch (err) { console.warn("3D scene disabled:", err); canvas.style.display = "none"; }
+  initScene(canvas).catch((err) => { console.warn("3D hero disabled:", err); canvas.style.display = "none"; });
 }
 
-function initScene(canvas) {
-  const scene = new THREE.Scene();
-  scene.fog = new THREE.Fog(0xf1e4c9, 9, 18); // depth haze matching the cream backdrop
-
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+async function initScene(canvas) {
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.15;
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-  camera.position.set(0, 0, 9);
+  const scene = new THREE.Scene();
+  scene.background = warmBackdrop();       // deep vintage radial, baked into the scene
+  scene.fog = new THREE.FogExp2(0x2a1418, 0.055);
 
-  // --- Soft, warm lighting ---
-  scene.add(new THREE.AmbientLight(0xfff3e2, 0.85));
-  const key = new THREE.DirectionalLight(0xfff0d4, 1.25);
-  key.position.set(3, 5, 6);
-  scene.add(key);
-  const fill = new THREE.DirectionalLight(0xd8a3a3, 0.35);
-  fill.position.set(-4, -1, 4);
-  scene.add(fill);
-  const rim = new THREE.DirectionalLight(0xd4af37, 0.4);
-  rim.position.set(-3, 4, -4);
-  scene.add(rim);
+  const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
+  camera.position.set(0, 0, 12);
 
-  const group = new THREE.Group();
-  group.rotation.set(-0.32, -0.22, 0.04); // relaxed flat-lay tilt
-  scene.add(group);
+  // --- Lighting: warm key + gold rim + soft fill ---
+  scene.add(new THREE.AmbientLight(0xffe9cf, 0.6));
+  const key = new THREE.DirectionalLight(0xfff1d6, 1.4); key.position.set(4, 5, 8); scene.add(key);
+  const rim = new THREE.DirectionalLight(0xd4af37, 0.9); rim.position.set(-6, 3, -4); scene.add(rim);
+  const fill = new THREE.PointLight(0x8a2a3c, 0.7, 40); fill.position.set(0, -3, 6); scene.add(fill);
 
-  // --- The letter: a subdivided plane, gently curled ---
-  const W = 5, H = 3.4, SEGS = 60;
-  const paperGeo = new THREE.PlaneGeometry(W, H, SEGS, Math.round(SEGS * H / W));
-  curl(paperGeo, W, H);
-  paperGeo.computeVertexNormals();
-
-  const paperMat = new THREE.MeshStandardMaterial({
-    color: 0xfaf3e2, roughness: 0.96, metalness: 0.0, side: THREE.DoubleSide,
-  });
-  const paper = new THREE.Mesh(paperGeo, paperMat);
-  group.add(paper);
-
-  // Faint darker backing for edge depth / drop shadow feel.
-  const backGeo = new THREE.PlaneGeometry(W + 0.06, H + 0.06);
-  const back = new THREE.Mesh(backGeo, new THREE.MeshStandardMaterial({ color: 0xe7d4ad, roughness: 1 }));
-  back.position.z = -0.05;
-  group.add(back);
-
-  // --- Wax seal: a slightly domed, hand-pressed disc ---
-  const seal = new THREE.Group();
-  const wax = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.44, 0.5, 0.14, 48),
-    new THREE.MeshStandardMaterial({ color: 0x6b1d2f, roughness: 0.42, metalness: 0.12 })
-  );
-  wax.rotation.x = Math.PI / 2;
-  seal.add(wax);
-  const dome = new THREE.Mesh(
-    new THREE.SphereGeometry(0.44, 40, 24, 0, Math.PI * 2, 0, Math.PI / 2.4),
-    new THREE.MeshStandardMaterial({ color: 0x7d2536, roughness: 0.5, metalness: 0.1 })
-  );
-  dome.rotation.x = -Math.PI / 2;
-  dome.position.z = 0.05;
-  seal.add(dome);
-  // Debossed inner ring.
-  const ring = new THREE.Mesh(
-    new THREE.TorusGeometry(0.3, 0.02, 16, 48),
-    new THREE.MeshStandardMaterial({ color: 0x571725, roughness: 0.6 })
-  );
-  ring.position.z = 0.11;
-  seal.add(ring);
-  // Position on the paper's lower-right, riding the curl.
-  seal.position.set(1.4, -0.85, curlZ(1.4, -0.85, W, H) + 0.08);
-  seal.rotation.z = -0.15;
-  group.add(seal);
-
-  // --- Drifting particles (soft gold + blush motes) ---
-  const motes = [];
-  const moteColors = [0xd4af37, 0xd8a3a3, 0xece0c6];
-  for (let i = 0; i < 22; i++) {
-    const m = new THREE.Mesh(
-      new THREE.CircleGeometry(0.03 + Math.random() * 0.05, 8),
-      new THREE.MeshBasicMaterial({ color: moteColors[i % 3], transparent: true, opacity: 0.5, side: THREE.DoubleSide })
-    );
-    m.position.set((Math.random() - 0.5) * 12, (Math.random() - 0.5) * 8, Math.random() * 4 - 1);
-    m.userData.speed = 0.15 + Math.random() * 0.3;
-    m.userData.sway = Math.random() * 6;
-    scene.add(m);
-    motes.push(m);
+  // --- Glowing dust particles (additive soft sprites) ---
+  const COUNT = 900;
+  const pGeo = new THREE.BufferGeometry();
+  const pos = new Float32Array(COUNT * 3);
+  const col = new Float32Array(COUNT * 3);
+  const siz = new Float32Array(COUNT);
+  const palette = [new THREE.Color(0xf6e2a8), new THREE.Color(0xd4af37), new THREE.Color(0xe7c9c0), new THREE.Color(0xfff6e6)];
+  for (let i = 0; i < COUNT; i++) {
+    pos[i * 3] = (Math.random() - 0.5) * 26;
+    pos[i * 3 + 1] = (Math.random() - 0.5) * 16;
+    pos[i * 3 + 2] = (Math.random() - 0.5) * 14 - 2;
+    const c = palette[(Math.random() * palette.length) | 0];
+    col[i * 3] = c.r; col[i * 3 + 1] = c.g; col[i * 3 + 2] = c.b;
+    siz[i] = 0.08 + Math.random() * 0.28;
   }
+  pGeo.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  pGeo.setAttribute("color", new THREE.BufferAttribute(col, 3));
+  pGeo.setAttribute("size", new THREE.BufferAttribute(siz, 1));
+  const points = new THREE.Points(pGeo, softPointsMaterial());
+  scene.add(points);
 
-  // --- Gentle interaction: parallax + soft optional drag, always eases home ---
-  let targetY = -0.22, targetX = -0.32, curY = targetY, curX = targetX;
-  let dragging = false, lastX = 0, lastY = 0;
-  const HOME_Y = -0.22, HOME_X = -0.32;
+  // --- Wax-seal medallion (focal object) ---
+  const seal = new THREE.Group();
+  const faceTex = sealTexture();
+  const face = new THREE.Mesh(
+    new THREE.CircleGeometry(2.0, 96),
+    new THREE.MeshStandardMaterial({ map: faceTex, roughness: 0.52, metalness: 0.08, color: 0xffffff })
+  );
+  seal.add(face);
+  const rimMesh = new THREE.Mesh(
+    new THREE.TorusGeometry(2.0, 0.16, 24, 96),
+    new THREE.MeshStandardMaterial({ color: 0x7d2536, roughness: 0.45, metalness: 0.25 })
+  );
+  seal.add(rimMesh);
+  // Soft glow halo behind the seal (additive), so it reads as pressed, glowing wax.
+  const halo = new THREE.Mesh(
+    new THREE.CircleGeometry(3.4, 64),
+    new THREE.MeshBasicMaterial({ map: haloTexture(), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false, opacity: 0.6 })
+  );
+  halo.position.z = -0.3;
+  seal.add(halo);
+  seal.position.set(0.2, 0.2, 2);
+  scene.add(seal);
 
-  const down = (x, y) => { dragging = true; lastX = x; lastY = y; };
-  const move = (x, y) => {
-    if (dragging) {
-      targetY += (x - lastX) * 0.004;
-      targetX += (y - lastY) * 0.003;
-      targetY = clamp(targetY, HOME_Y - 0.4, HOME_Y + 0.4);
-      targetX = clamp(targetX, HOME_X - 0.3, HOME_X + 0.3);
-      lastX = x; lastY = y;
-    } else {
-      targetY = HOME_Y + (x / window.innerWidth - 0.5) * 0.22;
-      targetX = HOME_X + (y / window.innerHeight - 0.5) * 0.12;
-    }
-  };
-  canvas.addEventListener("mousedown", (e) => down(e.clientX, e.clientY));
-  window.addEventListener("mousemove", (e) => move(e.clientX, e.clientY));
-  window.addEventListener("mouseup", () => (dragging = false));
-  canvas.addEventListener("touchstart", (e) => down(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
-  canvas.addEventListener("touchmove", (e) => move(e.touches[0].clientX, e.touches[0].clientY), { passive: true });
-  canvas.addEventListener("touchend", () => (dragging = false));
+  // --- Optional bloom (UnrealBloom via addons) ---
+  let composer = null;
+  try {
+    const [{ EffectComposer }, { RenderPass }, { UnrealBloomPass }, { OutputPass }] = await Promise.all([
+      import("three/addons/postprocessing/EffectComposer.js"),
+      import("three/addons/postprocessing/RenderPass.js"),
+      import("three/addons/postprocessing/UnrealBloomPass.js"),
+      import("three/addons/postprocessing/OutputPass.js"),
+    ]);
+    composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    composer.addPass(new UnrealBloomPass(new THREE.Vector2(1, 1), 0.7, 0.6, 0.18));
+    composer.addPass(new OutputPass());
+  } catch (_) { composer = null; } // fall back to direct render
+
+  // --- Gentle parallax (no jerky drag) ---
+  let mx = 0, my = 0, tx = 0, ty = 0;
+  window.addEventListener("mousemove", (e) => {
+    tx = (e.clientX / window.innerWidth - 0.5);
+    ty = (e.clientY / window.innerHeight - 0.5);
+  });
+  window.addEventListener("touchmove", (e) => {
+    tx = (e.touches[0].clientX / window.innerWidth - 0.5);
+    ty = (e.touches[0].clientY / window.innerHeight - 0.5);
+  }, { passive: true });
 
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
     renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
+    camera.aspect = w / h; camera.updateProjectionMatrix();
+    if (composer) composer.setSize(w, h);
   }
   window.addEventListener("resize", resize);
   resize();
@@ -133,34 +112,104 @@ function initScene(canvas) {
   (function animate() {
     requestAnimationFrame(animate);
     const t = clock.getElapsedTime();
-    if (!dragging) { targetY += (HOME_Y - targetY) * 0.01; targetX += (HOME_X - targetX) * 0.01; }
-    curY += (targetY - curY) * 0.05;
-    curX += (targetX - curX) * 0.05;
-    group.rotation.y = curY + Math.sin(t * 0.25) * 0.05;
-    group.rotation.x = curX;
-    group.position.y = Math.sin(t * 0.6) * 0.14;
+    mx += (tx - mx) * 0.04; my += (ty - my) * 0.04;
 
-    motes.forEach((m) => {
-      m.position.y -= m.userData.speed * 0.008;
-      m.position.x += Math.sin(t * 0.4 + m.userData.sway) * 0.002;
-      m.rotation.z += 0.006;
-      if (m.position.y < -4.2) { m.position.y = 4.2; m.position.x = (Math.random() - 0.5) * 12; }
-    });
-    renderer.render(scene, camera);
+    // Drift dust upward + slow swirl; wrap around.
+    const p = pGeo.attributes.position.array;
+    for (let i = 0; i < COUNT; i++) {
+      p[i * 3 + 1] += 0.004 + (siz[i] * 0.01);
+      p[i * 3] += Math.sin(t * 0.2 + i) * 0.0016;
+      if (p[i * 3 + 1] > 8) p[i * 3 + 1] = -8;
+    }
+    pGeo.attributes.position.needsUpdate = true;
+    points.rotation.y = t * 0.02;
+
+    // Medallion: subtle float + slow tilt, catching the rim light.
+    seal.rotation.y = Math.sin(t * 0.35) * 0.28 + mx * 0.5;
+    seal.rotation.x = Math.sin(t * 0.5) * 0.06 - my * 0.35;
+    seal.position.y = 0.2 + Math.sin(t * 0.7) * 0.12;
+
+    // Camera parallax dolly.
+    camera.position.x += (mx * 2.2 - camera.position.x) * 0.05;
+    camera.position.y += (-my * 1.4 - camera.position.y) * 0.05;
+    camera.lookAt(0, 0, 2);
+
+    composer ? composer.render() : renderer.render(scene, camera);
   })();
 }
 
-// Gentle paper curl: lift the bottom edge toward the viewer + a soft overall wave.
-function curl(geo, W, H) {
-  const pos = geo.attributes.position;
-  for (let i = 0; i < pos.count; i++) {
-    pos.setZ(i, curlZ(pos.getX(i), pos.getY(i), W, H));
+// ---- Texture helpers (canvas-generated, no external assets) ----
+function warmBackdrop() {
+  const c = document.createElement("canvas"); c.width = c.height = 512;
+  const g = c.getContext("2d");
+  const grad = g.createRadialGradient(256, 200, 40, 256, 300, 460);
+  grad.addColorStop(0, "#5a2230");
+  grad.addColorStop(0.45, "#3a1720");
+  grad.addColorStop(1, "#1c0d12");
+  g.fillStyle = grad; g.fillRect(0, 0, 512, 512);
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  return tex;
+}
+
+function softPointsMaterial() {
+  return new THREE.PointsMaterial({
+    size: 0.32, map: dotTexture(), vertexColors: true, transparent: true,
+    blending: THREE.AdditiveBlending, depthWrite: false, sizeAttenuation: true, opacity: 0.9,
+  });
+}
+
+function dotTexture() {
+  const c = document.createElement("canvas"); c.width = c.height = 64;
+  const g = c.getContext("2d");
+  const grad = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+  grad.addColorStop(0, "rgba(255,255,255,1)");
+  grad.addColorStop(0.25, "rgba(255,240,210,0.85)");
+  grad.addColorStop(1, "rgba(255,240,210,0)");
+  g.fillStyle = grad; g.fillRect(0, 0, 64, 64);
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; return tex;
+}
+
+function haloTexture() {
+  const c = document.createElement("canvas"); c.width = c.height = 256;
+  const g = c.getContext("2d");
+  const grad = g.createRadialGradient(128, 128, 20, 128, 128, 128);
+  grad.addColorStop(0, "rgba(212,175,55,0.55)");
+  grad.addColorStop(0.5, "rgba(139,42,60,0.18)");
+  grad.addColorStop(1, "rgba(0,0,0,0)");
+  g.fillStyle = grad; g.fillRect(0, 0, 256, 256);
+  const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace; return tex;
+}
+
+function sealTexture() {
+  const S = 512;
+  const c = document.createElement("canvas"); c.width = c.height = S;
+  const g = c.getContext("2d");
+  const cx = S / 2;
+  // Wax body.
+  const grad = g.createRadialGradient(cx - 60, cx - 70, 30, cx, cx, cx);
+  grad.addColorStop(0, "#9a3145");
+  grad.addColorStop(0.5, "#6b1d2f");
+  grad.addColorStop(1, "#4a1420");
+  g.fillStyle = grad; g.beginPath(); g.arc(cx, cx, cx - 6, 0, Math.PI * 2); g.fill();
+  // Debossed inner ring.
+  g.strokeStyle = "rgba(40,10,16,0.55)"; g.lineWidth = 10;
+  g.beginPath(); g.arc(cx, cx, cx - 70, 0, Math.PI * 2); g.stroke();
+  g.strokeStyle = "rgba(255,220,190,0.10)"; g.lineWidth = 4;
+  g.beginPath(); g.arc(cx, cx, cx - 62, 0, Math.PI * 2); g.stroke();
+  // Monogram — draw with deboss (dark) + subtle highlight.
+  const drawMono = () => {
+    g.textAlign = "center"; g.textBaseline = "middle";
+    g.font = "600 300px 'Noto Serif Devanagari', 'Cormorant Garamond', serif";
+    g.fillStyle = "rgba(30,8,14,0.5)"; g.fillText("अ", cx, cx + 24);
+    g.fillStyle = "rgba(255,225,195,0.12)"; g.fillText("अ", cx, cx + 18);
+  };
+  drawMono();
+  const tex = new THREE.CanvasTexture(c);
+  tex.colorSpace = THREE.SRGBColorSpace;
+  // Redraw once the Devanagari webfont is ready so the monogram renders crisply.
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => { drawMono(); tex.needsUpdate = true; });
   }
+  return tex;
 }
-function curlZ(x, y, W, H) {
-  const bottom = Math.max(0, (-y / (H / 2))); // 0 at center, 1 at bottom edge
-  const lift = Math.pow(bottom, 2.2) * 0.7;    // bottom edge curls up
-  const wave = Math.sin((x / W) * Math.PI) * 0.12; // soft lengthwise wave
-  return lift + wave;
-}
-function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }

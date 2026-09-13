@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Inkwell &amp; Ivy - Handmade Vintage Love Letters &amp; Keepsakes</title>
+  <title>Asli Tohfa - Handmade Vintage Love Letters &amp; Keepsakes</title>
   <meta name="description" content="Custom vintage love letters, wax-sealed keepsakes, and personalized romantic gifts. Handcrafted and delivered to your loved one." />
   <meta name="theme-color" content="#6b1d2f" />
-  <meta property="og:title" content="Inkwell & Ivy - Turn Your Words into Timeless Keepsakes" />
+  <meta property="og:title" content="Asli Tohfa - Turn Your Words into Timeless Keepsakes" />
   <meta property="og:description" content="Handmade vintage love letters, wax-sealed keepsakes & personalized romantic gifts." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,22 +14,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body>
+<body class="home">
   <div id="layout-top"></div>
 
   <main>
     <!-- Hero -->
-    <section class="hero" id="top">
+    <section class="hero hero-dark" id="top">
       <canvas id="scene" aria-hidden="true"></canvas>
+      <div class="hero-vignette" aria-hidden="true"></div>
+      <div class="hero-grain" aria-hidden="true"></div>
       <div class="hero-overlay">
-        <p class="eyebrow">Handmade · Sealed · Delivered</p>
+        <p class="eyebrow eyebrow-hi"><span lang="hi">असली तोहफ़ा</span> · Real Gifts, Made by Hand</p>
         <h1 class="hero-title">Turn Your Words into<br /><em>Timeless Keepsakes.</em></h1>
-        <p class="hero-sub">Custom vintage love letters, wax-sealed by hand and pressed with dried flowers - the lost art of writing, revived for the ones you love.</p>
+        <p class="hero-sub">Custom vintage love letters, wax-sealed by hand and pressed with dried flowers - the lost art of gifting, revived for the ones you love.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="custom-request.html">Create Your Letter</a>
-          <a class="btn btn-ghost" href="shop.html">Shop the Collection</a>
+          <a class="btn btn-primary" href="custom-request.html">Create Your Gift</a>
+          <a class="btn btn-ghost btn-ghost-light" href="shop.html">Shop the Collection</a>
         </div>
-        <p class="hero-hint">Drag the letter to explore ✦</p>
+        <p class="hero-hint">Move your cursor to explore ✦</p>
       </div>
       <div class="hero-fade"></div>
     </section>
@@ -89,7 +91,10 @@
 
   <div id="layout-bottom"></div>
 
-  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }</script>
+  <script type="importmap">{ "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  } }</script>
   <script src="assets/data.js"></script>
   <script src="assets/layout.js"></script>
   <script src="assets/cards.js"></script>

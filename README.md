@@ -1,4 +1,4 @@
-# Inkwell & Ivy - Handmade Gifting & Vintage Letters
+# Asli Tohfa - Handmade Gifting & Vintage Letters
 
 A 3D, interactive storefront for a handmade sentimental gifting studio specializing in **custom vintage love letters, wax-sealed keepsakes, and personalized romantic gifts.**
 
@@ -80,4 +80,4 @@ This is a fully-built **front end**. To transact real money and capture orders y
 3. **File/audio uploads** - the upload fields are wired in the UI; real storage needs the same backend/form service.
 4. **Order tracking & emails** - provided by the commerce platform (Shopify) or a service like Postmark for the aesthetic templates.
 
-Replace `hello@inkwellandivy.example` (in `request.js` and `contact.html`) with your real inbox, and swap **Inkwell & Ivy** for your final brand name.
+Replace `hello@aslitohfa.example` (in `request.js` and `contact.html`) with your real inbox, and swap **Asli Tohfa** for your final brand name.
