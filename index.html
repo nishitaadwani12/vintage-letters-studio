@@ -14,22 +14,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
-<body class="home">
+<body>
   <div id="layout-top"></div>
 
   <main>
     <!-- Hero -->
-    <section class="hero hero-dark" id="top">
+    <section class="hero" id="top">
       <canvas id="scene" aria-hidden="true"></canvas>
-      <div class="hero-vignette" aria-hidden="true"></div>
-      <div class="hero-grain" aria-hidden="true"></div>
       <div class="hero-overlay">
         <p class="eyebrow eyebrow-hi"><span lang="hi">असली तोहफ़ा</span> · Real Gifts, Made by Hand</p>
         <h1 class="hero-title">Turn Your Words into<br /><em>Timeless Keepsakes.</em></h1>
         <p class="hero-sub">Custom vintage love letters, wax-sealed by hand and pressed with dried flowers - the lost art of gifting, revived for the ones you love.</p>
         <div class="hero-cta">
           <a class="btn btn-primary" href="custom-request.html">Create Your Gift</a>
-          <a class="btn btn-ghost btn-ghost-light" href="shop.html">Shop the Collection</a>
+          <a class="btn btn-ghost" href="shop.html">Shop the Collection</a>
         </div>
         <p class="hero-hint">Move your cursor to explore ✦</p>
       </div>
@@ -91,10 +89,7 @@
 
   <div id="layout-bottom"></div>
 
-  <script type="importmap">{ "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-  } }</script>
+  <script type="importmap">{ "imports": { "three": "https://unpkg.com/three@0.160.0/build/three.module.js" } }</script>
   <script src="assets/data.js"></script>
   <script src="assets/layout.js"></script>
   <script src="assets/cards.js"></script>
