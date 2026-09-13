@@ -1,26 +1,56 @@
 # Inkwell & Ivy — Handmade Gifting & Vintage Letters
 
-A 3D, interactive prototype site for a handmade sentimental gifting studio specializing in **custom vintage love letters, wax-sealed keepsakes, and personalized romantic gifts.**
+A 3D, interactive storefront for a handmade sentimental gifting studio specializing in **custom vintage love letters, wax-sealed keepsakes, and personalized romantic gifts.**
 
 > Turn Your Words into Timeless Keepsakes.
 
-## What's here
+**Live demo:** https://nishitaadwani12.github.io/vintage-letters-studio/
 
-A fast, mobile-first, single-page storefront prototype built with vanilla HTML/CSS/JS + **Three.js** for an interactive 3D hero (a floating wax-sealed envelope with drifting pressed-flower petals — drag to explore).
+## Pages
 
-### Features implemented
-- **3D hero scene** (Three.js) — draggable wax-sealed envelope, rising letter, floating petals, warm vintage lighting. Degrades gracefully if WebGL is unavailable.
-- **Live product customizer (PDP)** with a real-time letter preview:
-  - Message text area with **word-count counter**
-  - **Font/script** selector (Calligraphy · Typewriter · Classic Cursive)
-  - **Wax seal color** swatches (Burgundy · Antique Gold · Forest Green · Blush Pink)
-  - **Paper type** selector (Tea-Stained · Cotton Deckle · Parchment)
-  - **Add-ons** with dynamic pricing (Dried Flowers · QR Audio · Keepsake Box)
-- **Category grid**, **How It Works** (3 steps), **best-sellers/reviews**, **About** brand story.
-- **Cart drawer** with discreet gift packaging + scheduled delivery date options.
-- Scroll reveal animations, sticky nav, full mobile responsiveness, basic SEO meta + OG tags.
+| Page | File | What it does |
+|---|---|---|
+| Home | `index.html` | 3D wax-sealed-envelope hero (drag to explore), category grid, How-It-Works, best-sellers, reviews |
+| Shop | `shop.html` | Filterable catalog by **category** and **occasion** (deep-linkable via `?cat=` / `?occ=`) |
+| Product | `product.html?id=…` | Product detail; customizable items get a **live letter preview** + options |
+| Custom Request | `custom-request.html` | **Free-form custom gift request form** with aesthetic prefs, file/audio upload, validation |
+| Cart & Checkout | `cart.html` | Line items, gift note, discreet packaging, scheduled delivery, order summary |
+| About | `about.html` | Brand story + values |
+| Contact | `contact.html` | Contact / order-tracking form |
 
-### Brand system
+## Features
+
+- **3D hero scene** (Three.js) — draggable wax-sealed envelope, rising letter, drifting pressed-flower petals, warm vintage lighting. Degrades gracefully if WebGL is unavailable.
+- **Live product customizer** (real-time letter preview): message + **word-count counter**, **font/script**, **wax seal color**, **paper type**, and **priced add-ons** (dried flowers, QR audio, keepsake box), plus optional audio upload.
+- **Custom gift request form** — a large free-text box for one-of-a-kind requests, occasion/budget/date fields, optional wax + paper preferences, attachment upload, discreet-shipping option, live validation, and a prefilled email submit.
+- **Persistent cart** — stored in `localStorage`, shared across every page, with a slide-out drawer + full cart page.
+- **Filterable shop**, gift note + scheduled delivery + discreet packaging at checkout.
+- Scroll-reveal animations, sticky nav, mobile menu, 100% responsive, SEO meta + OpenGraph tags.
+
+## Architecture
+
+Vanilla HTML/CSS/JS — no build step, deploys straight to any static host.
+
+```
+vintage-letters-studio/
+├── index.html  shop.html  product.html
+├── custom-request.html  cart.html  about.html  contact.html
+├── assets/
+│   ├── data.js      # product catalog + option sets (edit this to add products)
+│   ├── layout.js    # shared nav/footer/cart-drawer injection + localStorage cart
+│   ├── cards.js     # shared product-card renderer
+│   ├── styles.css   # brand system + all page styles
+│   ├── scene.js     # Three.js 3D hero
+│   ├── home.js  shop.js  product.js  request.js  cart.js
+└── README.md
+```
+
+**Shared layout:** every page has `<div id="layout-top">` and `<div id="layout-bottom">` mount points; `layout.js` injects the nav, footer, and cart drawer, so there's one source of truth.
+
+**Add a product:** append an object to `PRODUCTS` in `assets/data.js`. Set `customizable: true` to give it the live customizer.
+
+## Brand system
+
 | Token | Value |
 |---|---|
 | Cream | `#fdfbf7` |
@@ -29,11 +59,11 @@ A fast, mobile-first, single-page storefront prototype built with vanilla HTML/C
 | Antique Gold | `#d4af37` |
 | Soft Sage | `#8a9a86` |
 
-Type: **Cormorant Garamond** (serif headings) + **Inter** (body) + **Dancing Script** (letter preview).
+Type: **Cormorant Garamond** (serif headings) · **Inter** (body) · **Dancing Script** (letter preview).
 
 ## Run locally
 
-It's static — serve the folder with any web server (needed for the ES-module import map):
+Static, but the ES-module import map for Three.js needs a server:
 
 ```bash
 cd vintage-letters-studio
@@ -41,21 +71,13 @@ python3 -m http.server 8000
 # open http://localhost:8000
 ```
 
-## Path to production
+## Going live (what's left before real transactions)
 
-This is a **design/UX prototype**. For a launch-ready store with real payments, orders, and inventory, port it onto an e-commerce platform:
+This is a fully-built **front end**. To transact real money and capture orders you need a backend — pick one:
 
-- **Shopify** (recommended for this use case) — use a custom Liquid theme built from this design; add customization via a line-item-property app (e.g. Infinite Options / Variant Option Product Options) for the text area, swatches, file/audio upload, and add-on pricing. Supports Apple Pay / Google Pay / PayPal, order tracking, and email templates out of the box.
-- **WooCommerce** — Product Add-Ons plugin for the custom fields; more control, more maintenance.
-- **Webflow** — best if you want to keep this exact bespoke design; e-commerce is lighter on complex per-item customization.
+1. **Payments** — the checkout button is a prototype confirmation. Integrate Stripe/Shopify/PayPal (Apple Pay & Google Pay come with Stripe/Shopify). Easiest path for this exact design: keep the front end and use **Shopify** headless or a **Stripe Payment Link / Checkout** per product.
+2. **Form delivery** — `custom-request.js` and the contact form currently store submissions in `localStorage` and open a prefilled email. For production, point them at a real endpoint (e.g. **Formspree**, **Basin**, or your own API). Search for `TODO` / `STUDIO_EMAIL` in `assets/request.js`.
+3. **File/audio uploads** — the upload fields are wired in the UI; real storage needs the same backend/form service.
+4. **Order tracking & emails** — provided by the commerce platform (Shopify) or a service like Postmark for the aesthetic templates.
 
-## Structure
-```
-vintage-letters-studio/
-├── index.html          # markup + sections
-├── assets/
-│   ├── styles.css      # brand system + layout
-│   ├── scene.js        # Three.js 3D hero
-│   └── main.js         # customizer + cart logic
-└── README.md
-```
+Replace `hello@inkwellandivy.example` (in `request.js` and `contact.html`) with your real inbox, and swap **Inkwell & Ivy** for your final brand name.
