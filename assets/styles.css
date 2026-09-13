@@ -103,7 +103,9 @@ main { min-height: 60vh; }
   color: var(--burgundy); font-weight: 600; margin-bottom: clamp(1.2rem, 3vh, 2.4rem);
   opacity: 0; animation: fadeIn 0.8s 0.1s ease both; }
 .ed-display { font-family: var(--serif); font-weight: 600; line-height: 0.92;
-  font-size: clamp(3.2rem, 11vw, 9rem); letter-spacing: -0.01em; color: var(--ink); }
+  font-size: clamp(3.2rem, 11vw, 9rem); letter-spacing: -0.01em; color: var(--ink);
+  transform: perspective(1200px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d; transition: transform 0.4s ease; }
 .ed-display em { color: var(--burgundy); font-style: italic; }
 .ed-line { display: block; overflow: hidden; }
 .ed-line > span { display: block; transform: translateY(105%); animation: lineRise 0.95s cubic-bezier(.22,.8,.28,1) both; }
@@ -307,7 +309,8 @@ fieldset { border: none; }
 
 /* ---------- Reviews ---------- */
 .review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; }
-.review { background: #fff; border-radius: var(--radius); padding: 2rem; box-shadow: var(--card-shadow); border: 1px solid rgba(46,38,32,0.06); }
+.review { background: #fff; border-radius: var(--radius); padding: 2rem; box-shadow: var(--card-shadow); border: 1px solid rgba(46,38,32,0.06); transition: transform 0.18s ease, box-shadow 0.3s; will-change: transform; }
+.review:hover { box-shadow: var(--card-shadow-hover); }
 .stars { color: var(--gold); letter-spacing: 0.15em; margin-bottom: 0.8rem; }
 .review p { font-family: var(--serif); font-size: 1.25rem; font-style: italic; margin-bottom: 1rem; }
 .review cite { font-style: normal; font-size: 0.85rem; color: var(--muted); }

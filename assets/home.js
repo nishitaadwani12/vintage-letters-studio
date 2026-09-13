@@ -37,6 +37,24 @@
   const bestGrid = document.getElementById("bestGrid");
   if (bestGrid) bestGrid.innerHTML = D.PRODUCTS.filter((p) => p.bestseller).map(D.productCardHTML).join("");
 
+  // Subtle 3D cursor-parallax on the editorial hero headline.
+  const hero = document.querySelector(".ed-hero");
+  const display = document.querySelector(".ed-display");
+  const okMotion = !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
+  const hoverCapable = !(window.matchMedia && matchMedia("(hover: none)").matches);
+  if (hero && display && okMotion && hoverCapable) {
+    hero.addEventListener("pointermove", (e) => {
+      const px = e.clientX / window.innerWidth - 0.5;
+      const py = e.clientY / window.innerHeight - 0.5;
+      display.style.setProperty("--ry", (px * 5).toFixed(2) + "deg");
+      display.style.setProperty("--rx", (-py * 3).toFixed(2) + "deg");
+    });
+    hero.addEventListener("pointerleave", () => {
+      display.style.setProperty("--ry", "0deg");
+      display.style.setProperty("--rx", "0deg");
+    });
+  }
+
   function shortName(slug) {
     return { letters: "letters", flowers: "pressed flowers", boxes: "gift boxes" }[slug] || "the collection";
   }

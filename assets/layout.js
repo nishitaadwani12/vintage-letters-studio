@@ -43,7 +43,7 @@
         <a href="contact.html">Contact</a>
       </nav>
       <div class="nav-actions">
-        <a class="nav-cta" href="custom-request.html">Create Your Letter</a>
+        <a class="nav-cta" href="custom-request.html">Create Your Gift</a>
         <button class="cart-btn" id="cartBtn" aria-label="Open cart">Cart <span class="cart-count" id="cartCount">0</span></button>
       </div>
       <button class="nav-toggle" id="navToggle" aria-label="Menu">☰</button>
