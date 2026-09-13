@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop the Collection — Inkwell &amp; Ivy</title>
+  <meta name="description" content="Browse handmade vintage letters, pressed flower keepsakes, and interactive gift boxes. Filter by category and occasion." />
+  <meta name="theme-color" content="#6b1d2f" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div id="layout-top"></div>
+  <main>
+    <header class="page-head">
+      <h1>The Collection</h1>
+      <p>Every piece is handmade, wax-sealed, and slow-crafted. Filter by what you're looking for.</p>
+    </header>
+
+    <section class="section">
+      <div class="filters wrap">
+        <div class="filter-group">
+          <span class="filter-label">Category</span>
+          <div id="catFilters"></div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Occasion</span>
+          <div id="occFilters"></div>
+        </div>
+      </div>
+      <div class="product-grid wrap" id="grid"></div>
+    </section>
+  </main>
+  <div id="layout-bottom"></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/layout.js"></script>
+  <script src="assets/cards.js"></script>
+  <script src="assets/shop.js" defer></script>
+</body>
+</html>
