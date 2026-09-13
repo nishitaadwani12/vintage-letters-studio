@@ -42,16 +42,19 @@
   const display = document.querySelector(".ed-display");
   const okMotion = !(window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches);
   const hoverCapable = !(window.matchMedia && matchMedia("(hover: none)").matches);
+  const orbs = hero && hero.querySelector(".ed-orbs");
   if (hero && display && okMotion && hoverCapable) {
     hero.addEventListener("pointermove", (e) => {
       const px = e.clientX / window.innerWidth - 0.5;
       const py = e.clientY / window.innerHeight - 0.5;
       display.style.setProperty("--ry", (px * 5).toFixed(2) + "deg");
       display.style.setProperty("--rx", (-py * 3).toFixed(2) + "deg");
+      if (orbs) orbs.style.transform = `translate(${(px * -34).toFixed(1)}px, ${(py * -28).toFixed(1)}px)`;
     });
     hero.addEventListener("pointerleave", () => {
       display.style.setProperty("--ry", "0deg");
       display.style.setProperty("--rx", "0deg");
+      if (orbs) orbs.style.transform = "";
     });
   }
 
