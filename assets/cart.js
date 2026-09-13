@@ -60,18 +60,78 @@
     document.getElementById("checkout").addEventListener("click", checkout);
   }
 
-  function checkout() {
+  async function checkout() {
+    const btn = document.getElementById("checkout");
     const note = document.getElementById("giftNote").value.trim();
     const date = document.getElementById("deliveryDate").value;
     const discreet = document.getElementById("discreet").checked;
-    // Prototype: confirm + clear. Replace with a real payment session for launch.
-    const parts = ["Thank you! Your order is confirmed (prototype)."];
-    if (date) parts.push("Scheduled for delivery on " + date + ".");
-    if (discreet) parts.push("It'll ship discreetly with no invoice inside.");
-    if (note) parts.push('Your gift note: "' + note + '"');
-    alert(parts.join("\n\n"));
-    D.Cart.clear();
-    render();
+    const items = D.Cart.read().map((i) => ({ id: i.id, addons: i.addons || [] }));
+
+    // Ask our serverless function to create a Razorpay order (amount validated server-side).
+    let order;
+    try {
+      btn.disabled = true; btn.textContent = "Starting secure checkout…";
+      const r = await fetch("/api/create-order", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items }),
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data.error || "Could not start checkout");
+      order = data;
+    } catch (err) {
+      btn.disabled = false;
+      renderCheckoutBtn();
+      // Fallback for the static preview (GitHub Pages) or before keys are set.
+      alert(
+        "Online payment isn't available in this preview.\n\n" +
+        "On the live site (deployed to Vercel with your Razorpay keys set), " +
+        "clicking Checkout opens the secure Razorpay UPI/card window.\n\n(" + err.message + ")"
+      );
+      return;
+    }
+
+    if (typeof Razorpay === "undefined") {
+      btn.disabled = false; renderCheckoutBtn();
+      alert("Payment library not loaded. Please refresh and try again.");
+      return;
+    }
+
+    const rzp = new Razorpay({
+      key: order.keyId,
+      order_id: order.orderId,
+      amount: order.amount,
+      currency: order.currency,
+      name: "Asli Tohfa",
+      description: "Handcrafted gifts, sealed with meaning",
+      theme: { color: "#6b1d2f" },
+      notes: { giftNote: note, deliveryDate: date, discreet: discreet ? "yes" : "no" },
+      handler: async (resp) => {
+        try {
+          const v = await fetch("/api/verify", {
+            method: "POST", headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(resp),
+          });
+          const out = await v.json();
+          if (out.ok) {
+            D.Cart.clear();
+            render();
+            alert("Payment successful! Thank you — we'll email you shortly to craft your order.");
+          } else {
+            alert("We couldn't verify the payment. If money was deducted, email aslitohfa@gmail.com and we'll sort it out.");
+          }
+        } catch (_) {
+          alert("Payment received, but verification hit a snag. Please email aslitohfa@gmail.com.");
+        }
+      },
+      modal: { ondismiss: () => { btn.disabled = false; renderCheckoutBtn(); } },
+    });
+    rzp.on("payment.failed", () => { btn.disabled = false; renderCheckoutBtn(); });
+    rzp.open();
+  }
+
+  function renderCheckoutBtn() {
+    const btn = document.getElementById("checkout");
+    if (btn) btn.textContent = "Checkout · " + money(D.Cart.total() + SHIP);
   }
 
   function escapeHtml(s) {

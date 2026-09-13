@@ -1,11 +1,13 @@
 // Custom gift request form: populate options, validate, and submit.
-// Prototype submit persists locally + opens a prefilled email. Swap `submitRequest`
-// for a real endpoint (Formspree / your API) when going live - see README.
+// Submits to Formspree if configured (real delivery to the studio inbox);
+// otherwise falls back to opening a prefilled email. See DEPLOY.md.
 (function () {
   "use strict";
   const D = window.INKWELL;
   const STORE_KEY = "inkwell_requests_v1";
   const STUDIO_EMAIL = "aslitohfa@gmail.com";
+  // TODO: create a free form at formspree.io for aslitohfa@gmail.com and paste its ID.
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
   const form = document.getElementById("requestForm");
   const success = document.getElementById("success");
@@ -61,13 +63,27 @@
     form.scrollIntoView({ behavior: "smooth" });
   });
 
-  // --- Submit (prototype): store locally + open prefilled email draft ---
+  // --- Submit: keep a local backup, then deliver via Formspree (or email fallback) ---
   function submitRequest(data) {
     try {
       const all = JSON.parse(localStorage.getItem(STORE_KEY)) || [];
       all.push(data);
       localStorage.setItem(STORE_KEY, JSON.stringify(all));
     } catch (_) {}
+
+    if (!FORMSPREE_ENDPOINT.includes("YOUR_FORM_ID")) {
+      // Real delivery to the studio inbox, no page reload.
+      fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ _subject: "Custom gift request from " + data.name, ...data }),
+      }).catch(() => mailtoFallback(data));
+      return;
+    }
+    mailtoFallback(data);
+  }
+
+  function mailtoFallback(data) {
     const body = [
       `Name: ${data.name}`,
       `Email: ${data.email}`,
@@ -83,7 +99,6 @@
       data.request,
     ].join("\n");
     const href = `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent("Custom gift request from " + data.name)}&body=${encodeURIComponent(body)}`;
-    // Open the user's mail client as a functional fallback in this static prototype.
     window.open(href, "_blank");
   }
 

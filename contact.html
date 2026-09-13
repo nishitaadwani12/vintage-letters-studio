@@ -50,6 +50,8 @@
   <script src="assets/layout.js"></script>
   <script>
     (function () {
+      // TODO: paste your Formspree form ID (create one for aslitohfa@gmail.com). See DEPLOY.md.
+      var FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
       var form = document.getElementById("contactForm");
       var ok = document.getElementById("cSuccess");
       var err = document.getElementById("cError");
@@ -64,9 +66,19 @@
         }
         try {
           var all = JSON.parse(localStorage.getItem("inkwell_contact_v1")) || [];
-          all.push(Object.assign(d, { at: new Date().toISOString() }));
+          all.push(Object.assign({}, d, { at: new Date().toISOString() }));
           localStorage.setItem("inkwell_contact_v1", JSON.stringify(all));
         } catch (_) {}
+        if (FORMSPREE_ENDPOINT.indexOf("YOUR_FORM_ID") === -1) {
+          fetch(FORMSPREE_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify(Object.assign({ _subject: "Contact from " + d.name }, d)),
+          }).catch(function () {
+            window.open("mailto:aslitohfa@gmail.com?subject=" + encodeURIComponent("Contact from " + d.name) +
+              "&body=" + encodeURIComponent(d.message + "\n\nFrom: " + d.name + " (" + d.email + ")"), "_blank");
+          });
+        }
         form.style.display = "none";
         ok.classList.add("show");
       });

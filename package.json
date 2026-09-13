@@ -1,0 +1,9 @@
+{
+  "name": "asli-tohfa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Asli Tohfa - handcrafted gifting storefront",
+  "dependencies": {
+    "razorpay": "^2.9.4"
+  }
+}

@@ -38,7 +38,7 @@
       </div>`;
     document.getElementById("add").addEventListener("click", () => {
       const note = document.getElementById("note").value.trim();
-      addToCart({ name: product.name, price: product.price, summary: note ? "Note: " + note.slice(0, 40) : "" });
+      addToCart({ id: product.id, name: product.name, price: product.price, addons: [], summary: note ? "Note: " + note.slice(0, 40) : "" });
     });
   }
 
@@ -133,7 +133,8 @@
       const addonNames = state.addons.map((a) => O.addons.find((x) => x.id === a.id).label);
       const summary = [fontLabel, waxName + " wax", paperName].concat(addonNames.length ? ["+ " + addonNames.join(", ")] : []).join(" · ");
       addToCart({
-        name: product.name, price: total(), summary,
+        id: product.id, name: product.name, price: total(), summary,
+        addons: state.addons.map((a) => a.id),
         details: { message: msg, font: state.font, wax: state.wax, paper: state.paper, addons: state.addons.map((a) => a.id) },
       });
     });
