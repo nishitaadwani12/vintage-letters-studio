@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Gift Request — Inkwell &amp; Ivy</title>
+  <meta name="description" content="Dreaming up a one-of-a-kind gift? Tell us what you have in mind and we'll handcraft it from scratch." />
+  <meta name="theme-color" content="#6b1d2f" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <div id="layout-top"></div>
+  <main>
+    <header class="page-head">
+      <h1>Create Your Custom Gift</h1>
+      <p>Have something all your own in mind? Tell us your story and we'll handcraft a keepsake from scratch — no product page required.</p>
+    </header>
+
+    <section class="section" style="padding-top:2rem">
+      <form class="form-card" id="requestForm" novalidate>
+        <fieldset>
+          <div class="form-row">
+            <label class="field"><span class="field-label">Your name <span class="req">*</span></span>
+              <input type="text" name="name" required placeholder="Jane Doe" /></label>
+            <label class="field"><span class="field-label">Email <span class="req">*</span></span>
+              <input type="email" name="email" required placeholder="you@email.com" /></label>
+          </div>
+          <div class="form-row">
+            <label class="field"><span class="field-label">Occasion</span>
+              <select name="occasion" id="occasion"></select></label>
+            <label class="field"><span class="field-label">Ideal delivery date</span>
+              <input type="date" name="deliveryDate" /></label>
+          </div>
+          <div class="form-row">
+            <label class="field"><span class="field-label">Who is it for?</span>
+              <input type="text" name="recipient" placeholder="Partner, best friend, mom…" /></label>
+            <label class="field"><span class="field-label">Budget range</span>
+              <select name="budget">
+                <option value="">No preference</option>
+                <option>Under $50</option>
+                <option>$50–$100</option>
+                <option>$100–$200</option>
+                <option>$200+</option>
+              </select></label>
+          </div>
+
+          <!-- The customized gift request box (main ask) -->
+          <label class="field">
+            <span class="field-label">Describe your dream gift <span class="req">*</span> <em id="reqCount">0 / 1500</em></span>
+            <textarea name="request" id="requestBox" required maxlength="1500" style="min-height:180px"
+              placeholder="Tell us everything — the story behind it, what you'd like it to say, colors or flowers you love, whether you want a wax seal or audio, how it should feel to unbox. The more detail, the better we can handcraft it."></textarea>
+            <p class="form-note">Ideas welcome: a bundle of monthly letters, a proposal box, a memory jar of inside jokes, a pressed-flower map of where you met…</p>
+          </label>
+
+          <!-- Optional aesthetic preferences -->
+          <div class="field"><span class="field-label">Aesthetic preferences (optional)</span>
+            <div class="swatches" id="waxPrefs"></div>
+            <div class="swatches" id="paperPrefs" style="margin-top:0.6rem"></div>
+          </div>
+
+          <label class="field"><span class="field-label">Attach a reference or audio (optional)</span>
+            <input type="file" name="attachment" accept="image/*,audio/*,.pdf" />
+            <p class="form-note">A photo, voice note, or inspiration image helps us capture your vision.</p></label>
+
+          <label class="gift-opt"><input type="checkbox" name="discreet" /> Ship discreetly to the recipient (no invoice inside the package)</label>
+
+          <button class="btn btn-primary btn-block" type="submit" style="margin-top:1rem">Send My Custom Request</button>
+          <p class="form-note" id="formError" style="color:var(--burgundy);display:none"></p>
+        </fieldset>
+      </form>
+
+      <div class="form-card form-success" id="success">
+        <div class="big">✦</div>
+        <h2>Your request is on its way</h2>
+        <p style="color:var(--muted);max-width:460px;margin:0.6rem auto 1.4rem">Thank you — we've saved your custom gift request. Our studio will reach out within 1–2 business days to bring it to life.</p>
+        <a class="btn btn-ghost" href="shop.html">Browse the collection</a>
+        <a class="btn btn-primary" href="#" id="anotherBtn">Submit another</a>
+      </div>
+    </section>
+  </main>
+  <div id="layout-bottom"></div>
+
+  <script src="assets/data.js"></script>
+  <script src="assets/layout.js"></script>
+  <script src="assets/request.js" defer></script>
+</body>
+</html>
