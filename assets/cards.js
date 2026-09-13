@@ -3,7 +3,7 @@ window.INKWELL = window.INKWELL || {};
 window.INKWELL.productCardHTML = function (p) {
   const money = window.INKWELL.money || ((n) => "₹" + n);
   return `
-    <article class="product-card">
+    <article class="product-card tilt">
       <a class="product-thumb" href="product.html?id=${p.id}" aria-label="${p.name}">
         ${p.bestseller ? '<span class="badge">Best Seller</span>' : ""}
         <img src="${p.img}" alt="${p.name}" loading="lazy" />

@@ -10,7 +10,7 @@
       const n = String(i + 1).padStart(2, "0");
       return `
       <section class="story${i % 2 ? " story-reverse" : ""} reveal" style="--accent:${c.accent}">
-        <div class="story-media">
+        <div class="story-media tilt">
           <img class="story-photo" src="${c.img}" alt="${c.name}" loading="lazy" />
         </div>
         <div class="story-text">

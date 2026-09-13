@@ -128,7 +128,7 @@ main { min-height: 60vh; }
   min-height: 88vh; padding: clamp(3rem, 7vw, 6rem) clamp(1.4rem, 6vw, 6rem); }
 .story:nth-child(even) { background: var(--parchment); }
 .story-reverse .story-media { order: 2; }
-.story-media { position: relative; aspect-ratio: 4/5; border-radius: 8px; overflow: hidden;
+.story-media { position: relative; aspect-ratio: 4/5; border-radius: 8px; overflow: hidden; transition: transform 0.2s ease; will-change: transform;
   background: linear-gradient(150deg, color-mix(in srgb, var(--accent) 22%, #fff), color-mix(in srgb, var(--accent) 45%, #efe0c5));
   display: grid; place-items: center; box-shadow: var(--shadow); }
 .story-media::after { content: ""; position: absolute; inset: 0; box-shadow: inset 0 0 120px rgba(46,38,32,0.18); pointer-events: none; }
@@ -201,8 +201,8 @@ main { min-height: 60vh; }
 .pill.is-active { background: var(--burgundy); color: var(--cream); border-color: var(--burgundy); }
 
 .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.6rem; }
-.product-card { background: #fff; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(46,38,32,0.07); box-shadow: var(--card-shadow); transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; }
-.product-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
+.product-card { background: #fff; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(46,38,32,0.07); box-shadow: var(--card-shadow); transition: transform 0.18s ease, box-shadow 0.3s; display: flex; flex-direction: column; will-change: transform; }
+.product-card:hover { box-shadow: var(--card-shadow-hover); }
 .product-thumb { aspect-ratio: 4/3; position: relative; overflow: hidden; background: linear-gradient(150deg, var(--parchment), #e9dab8); display: block; }
 .product-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(.2,.7,.2,1); }
 .product-card:hover .product-thumb img { transform: scale(1.06); }

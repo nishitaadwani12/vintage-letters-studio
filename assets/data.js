@@ -257,39 +257,47 @@ window.INKWELL.OPTIONS = {
   ],
 };
 
-// --- Reference photos (keyword-based free Flickr CC images via loremflickr) ---
-// Swap `p.img` / `c.img` for your own product photography before launch.
-window.INKWELL.photoURL = (kw, w, h, lock) =>
-  `https://loremflickr.com/${w}/${h}/${encodeURIComponent(kw)}?lock=${lock}`;
+// --- Reference photos (curated, subject-matched free photos via Unsplash) ---
+// Each ID was picked to match the actual gift type. Swap `p.img` / `c.img`
+// for your own product photography before launch.
+window.INKWELL.photoURL = (id, w, h) =>
+  `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&q=80&auto=format&fit=crop`;
 
-const PHOTO_KW = {
-  "custom-vintage-letter": "letter,wax,seal",
-  "love-letter-bundle": "letters,vintage,ribbon",
-  "open-when-letters": "envelope,letters",
-  "reasons-i-love-you-deck": "love,notes,cards",
-  "long-distance-letter": "letter,envelope,vintage",
-  "pressed-flower-frame": "pressed,flowers,frame",
-  "birth-flower-frame": "flower,frame",
-  "star-map-frame": "night,sky,stars",
-  "flower-initial-keepsake": "dried,flowers",
-  "pressed-flower-bookmark": "bookmark,flowers",
-  "memory-jar": "mason,jar,notes",
-  "anniversary-time-capsule": "wooden,box,gift",
-  "vintage-gift-box": "gift,box,vintage",
-  "wedding-vow-keepsake": "wedding,flowers,frame",
-  "365-days-of-us-jar": "jar,paper,notes",
-  "scratch-date-night-box": "gift,box,cards",
-  "where-we-met-map": "vintage,map",
-  "newborn-keepsake-letter": "baby,keepsake,gift",
-  "remembrance-letter": "letter,candle,flowers",
+const PHOTO_ID = {
+  // Letters & notes — sealed envelopes, wax, handwriting.
+  "custom-vintage-letter": "1642069526127-75907e007187",
+  "love-letter-bundle": "1642069525937-ce9e8b24413a",
+  "open-when-letters": "1573046171778-f6506436ec62",
+  "reasons-i-love-you-deck": "1638607290333-a5702465d1f9",
+  "long-distance-letter": "1642069526127-75907e007187",
+  "newborn-keepsake-letter": "1573046171778-f6506436ec62",
+  "remembrance-letter": "1642069525937-ce9e8b24413a",
+  // Pressed flowers & framed keepsakes.
+  "pressed-flower-frame": "1775780307681-3340157a1d26",
+  "birth-flower-frame": "1644664575825-931a3a101279",
+  "flower-initial-keepsake": "1621264411684-b3ff856c1d49",
+  "pressed-flower-bookmark": "1631423020277-ee28d5912971",
+  "wedding-vow-keepsake": "1644664575825-931a3a101279",
+  "where-we-met-map": "1621264411684-b3ff856c1d49",
+  "star-map-frame": "1488866022504-f2584929ca5f",
+  // Boxes & jars.
+  "memory-jar": "1518745751685-7de700e56f72",
+  "365-days-of-us-jar": "1523292426375-339a4ba8e0bd",
+  "anniversary-time-capsule": "1610377507996-dcd4f0cfc125",
+  "vintage-gift-box": "1545844568-98bb15133ec0",
+  "scratch-date-night-box": "1592903297149-37fb25202dfa",
 };
-const CAT_KW = { letters: "wax,seal,letter", flowers: "pressed,flowers,frame", boxes: "gift,box,ribbon" };
+const CAT_ID = {
+  letters: "1642069526127-75907e007187",
+  flowers: "1775780307681-3340157a1d26",
+  boxes: "1545844568-98bb15133ec0",
+};
 
-window.INKWELL.PRODUCTS.forEach((p, i) => {
-  p.img = window.INKWELL.photoURL(PHOTO_KW[p.id] || p.category, 800, 600, i + 1);
+window.INKWELL.PRODUCTS.forEach((p) => {
+  p.img = window.INKWELL.photoURL(PHOTO_ID[p.id] || CAT_ID[p.category], 800, 600);
 });
-window.INKWELL.CATEGORIES.forEach((c, i) => {
-  c.img = window.INKWELL.photoURL(CAT_KW[c.slug] || "gift", 900, 1100, 100 + i);
+window.INKWELL.CATEGORIES.forEach((c) => {
+  c.img = window.INKWELL.photoURL(CAT_ID[c.slug], 900, 1100);
 });
 
 window.INKWELL.getProduct = (id) => window.INKWELL.PRODUCTS.find((p) => p.id === id);

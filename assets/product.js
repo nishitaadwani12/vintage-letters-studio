@@ -23,7 +23,7 @@
   function renderSimple() {
     pdp.innerHTML = `
       <div class="pdp-preview">
-        <img class="pdp-photo" src="${product.img}" alt="${product.name}" />
+        <img class="pdp-photo tilt" src="${product.img}" alt="${product.name}" />
         <p class="preview-caption">Handmade to order</p>
       </div>
       <div class="pdp-config">
