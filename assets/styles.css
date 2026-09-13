@@ -1,16 +1,25 @@
+/* ============================================================
+   Asli Tohfa — "Rosewood & Marigold" (Heirloom) theme
+   An elegant vintage-romantic palette with a warm Indian-heritage
+   nod, fitting the brand's Hindi name. Ivory base · rosewood
+   burgundy · antique gold + marigold · soft rose accent.
+   ============================================================ */
 :root {
-  --cream: #fdfbf7;
-  --parchment: #f4ead5;
-  --burgundy: #6b1d2f;
-  --gold: #d4af37;
-  --sage: #8a9a86;
-  --ink: #2e2620;
+  --cream: #fdf9f0;      /* warm ivory base */
+  --parchment: #f3e7cf;  /* aged paper */
+  --burgundy: #6b1d2f;   /* rosewood */
+  --gold: #cba53a;       /* antique gold */
+  --marigold: #e4a11b;   /* warm heritage highlight */
+  --rose: #c97b84;       /* soft romantic accent */
+  --sage: #8a9a86;       /* muted botanical */
+  --ink: #2b2320;        /* warm ink text */
   --muted: #6a6058;
   --serif: "Cormorant Garamond", Georgia, serif;
   --script: "Dancing Script", cursive;
   --sans: "Inter", system-ui, sans-serif;
-  --shadow: 0 18px 50px -20px rgba(46, 38, 32, 0.4);
-  --card-shadow: 0 6px 24px -18px rgba(46, 38, 32, 0.5);
+  --shadow: 0 18px 50px -20px rgba(43, 35, 32, 0.4);
+  --card-shadow: 0 6px 24px -18px rgba(43, 35, 32, 0.5);
+  --card-shadow-hover: 0 26px 55px -22px rgba(122, 31, 43, 0.4);
   --radius: 16px;
 }
 
@@ -103,7 +112,7 @@ main { min-height: 60vh; }
 .ed-line:nth-child(3) > span { animation-delay: 0.41s; }
 @keyframes lineRise { to { transform: none; } }
 @keyframes fadeIn { to { opacity: 1; } }
-.ed-rule { height: 2px; width: clamp(120px, 22vw, 260px); background: linear-gradient(90deg, var(--gold), transparent);
+.ed-rule { height: 2px; width: clamp(120px, 22vw, 260px); background: linear-gradient(90deg, var(--marigold), var(--rose) 70%, transparent);
   margin: clamp(1.6rem, 4vh, 2.6rem) 0; transform-origin: left; animation: ruleGrow 1s 0.7s cubic-bezier(.22,.8,.28,1) both; }
 @keyframes ruleGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .ed-hero-foot { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 2rem;
@@ -193,7 +202,7 @@ main { min-height: 60vh; }
 
 .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1.6rem; }
 .product-card { background: #fff; border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(46,38,32,0.07); box-shadow: var(--card-shadow); transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column; }
-.product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); }
+.product-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
 .product-thumb { aspect-ratio: 4/3; position: relative; overflow: hidden; background: linear-gradient(150deg, var(--parchment), #e9dab8); display: block; }
 .product-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(.2,.7,.2,1); }
 .product-card:hover .product-thumb img { transform: scale(1.06); }

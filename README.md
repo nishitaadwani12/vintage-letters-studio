@@ -49,15 +49,20 @@ vintage-letters-studio/
 
 **Add a product:** append an object to `PRODUCTS` in `assets/data.js`. Set `customizable: true` to give it the live customizer.
 
-## Brand system
+## Brand theme — "Rosewood & Marigold" (Heirloom)
 
-| Token | Value |
-|---|---|
-| Cream | `#fdfbf7` |
-| Vintage Parchment | `#f4ead5` |
-| Deep Burgundy | `#6b1d2f` |
-| Antique Gold | `#d4af37` |
-| Soft Sage | `#8a9a86` |
+An elegant vintage-romantic palette with a warm Indian-heritage nod that fits the brand's Hindi name (*Asli Tohfa* = "real gift"). Chosen to be the refined, timeless counterpart to a playful pastel brand — quiet, warm, and expensive-feeling.
+
+| Token | Value | Use |
+|---|---|---|
+| Ivory | `#fdf9f0` | base background |
+| Aged Parchment | `#f3e7cf` | panels, alt sections |
+| Rosewood Burgundy | `#6b1d2f` | primary, headings accent |
+| Antique Gold | `#cba53a` | fine accents, rules |
+| Marigold | `#e4a11b` | warm heritage highlight |
+| Soft Rose | `#c97b84` | romantic accent, hovers |
+| Warm Ink | `#2b2320` | body text |
+| Muted Botanical (Sage) | `#8a9a86` | quiet secondary |
 
 Type: **Cormorant Garamond** (serif headings) · **Inter** (body) · **Dancing Script** (letter preview).
 
