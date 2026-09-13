@@ -1,6 +1,6 @@
 // Custom gift request form: populate options, validate, and submit.
 // Prototype submit persists locally + opens a prefilled email. Swap `submitRequest`
-// for a real endpoint (Formspree / your API) when going live — see README.
+// for a real endpoint (Formspree / your API) when going live - see README.
 (function () {
   "use strict";
   const D = window.INKWELL;
@@ -71,12 +71,12 @@
     const body = [
       `Name: ${data.name}`,
       `Email: ${data.email}`,
-      `Occasion: ${data.occasion || "—"}`,
-      `Recipient: ${data.recipient || "—"}`,
-      `Budget: ${data.budget || "—"}`,
-      `Delivery date: ${data.deliveryDate || "—"}`,
-      `Wax preference: ${data.waxPref || "—"}`,
-      `Paper preference: ${data.paperPref || "—"}`,
+      `Occasion: ${data.occasion || " - "}`,
+      `Recipient: ${data.recipient || " - "}`,
+      `Budget: ${data.budget || " - "}`,
+      `Delivery date: ${data.deliveryDate || " - "}`,
+      `Wax preference: ${data.waxPref || " - "}`,
+      `Paper preference: ${data.paperPref || " - "}`,
       `Discreet shipping: ${data.discreet ? "Yes" : "No"}`,
       "",
       "Request:",

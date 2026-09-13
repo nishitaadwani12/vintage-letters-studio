@@ -129,7 +129,7 @@ main { min-height: 60vh; }
 .pdp { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
 .pdp-preview { position: sticky; top: 90px; }
 .letter-preview {
-  /* Soft mat the letter rests on — flat-lay, not skewed. */
+  /* Soft mat the letter rests on - flat-lay, not skewed. */
   padding: clamp(1.2rem, 3vw, 2rem);
   background: radial-gradient(120% 120% at 30% 20%, #efe6d3, #e4d6b8);
   border-radius: var(--radius);

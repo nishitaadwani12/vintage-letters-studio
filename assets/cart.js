@@ -1,11 +1,11 @@
 // Cart & checkout page: full line items, gift options, order summary.
-// Checkout is a prototype confirmation — wire to a real payment provider for launch.
+// Checkout is a prototype confirmation - wire to a real payment provider for launch.
 (function () {
   "use strict";
   const D = window.INKWELL;
   const money = D.money;
   const root = document.getElementById("cartRoot");
-  const SHIP = 6;
+  const SHIP = 79;
 
   function emojiFor(name) {
     const p = D.PRODUCTS.find((x) => x.name === name);

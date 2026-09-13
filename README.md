@@ -1,4 +1,4 @@
-# Inkwell & Ivy — Handmade Gifting & Vintage Letters
+# Inkwell & Ivy - Handmade Gifting & Vintage Letters
 
 A 3D, interactive storefront for a handmade sentimental gifting studio specializing in **custom vintage love letters, wax-sealed keepsakes, and personalized romantic gifts.**
 
@@ -20,16 +20,16 @@ A 3D, interactive storefront for a handmade sentimental gifting studio specializ
 
 ## Features
 
-- **3D hero scene** (Three.js) — draggable wax-sealed envelope, rising letter, drifting pressed-flower petals, warm vintage lighting. Degrades gracefully if WebGL is unavailable.
+- **3D hero scene** (Three.js) - draggable wax-sealed envelope, rising letter, drifting pressed-flower petals, warm vintage lighting. Degrades gracefully if WebGL is unavailable.
 - **Live product customizer** (real-time letter preview): message + **word-count counter**, **font/script**, **wax seal color**, **paper type**, and **priced add-ons** (dried flowers, QR audio, keepsake box), plus optional audio upload.
-- **Custom gift request form** — a large free-text box for one-of-a-kind requests, occasion/budget/date fields, optional wax + paper preferences, attachment upload, discreet-shipping option, live validation, and a prefilled email submit.
-- **Persistent cart** — stored in `localStorage`, shared across every page, with a slide-out drawer + full cart page.
+- **Custom gift request form** - a large free-text box for one-of-a-kind requests, occasion/budget/date fields, optional wax + paper preferences, attachment upload, discreet-shipping option, live validation, and a prefilled email submit.
+- **Persistent cart** - stored in `localStorage`, shared across every page, with a slide-out drawer + full cart page.
 - **Filterable shop**, gift note + scheduled delivery + discreet packaging at checkout.
 - Scroll-reveal animations, sticky nav, mobile menu, 100% responsive, SEO meta + OpenGraph tags.
 
 ## Architecture
 
-Vanilla HTML/CSS/JS — no build step, deploys straight to any static host.
+Vanilla HTML/CSS/JS - no build step, deploys straight to any static host.
 
 ```
 vintage-letters-studio/
@@ -73,11 +73,11 @@ python3 -m http.server 8000
 
 ## Going live (what's left before real transactions)
 
-This is a fully-built **front end**. To transact real money and capture orders you need a backend — pick one:
+This is a fully-built **front end**. To transact real money and capture orders you need a backend - pick one:
 
-1. **Payments** — the checkout button is a prototype confirmation. Integrate Stripe/Shopify/PayPal (Apple Pay & Google Pay come with Stripe/Shopify). Easiest path for this exact design: keep the front end and use **Shopify** headless or a **Stripe Payment Link / Checkout** per product.
-2. **Form delivery** — `custom-request.js` and the contact form currently store submissions in `localStorage` and open a prefilled email. For production, point them at a real endpoint (e.g. **Formspree**, **Basin**, or your own API). Search for `TODO` / `STUDIO_EMAIL` in `assets/request.js`.
-3. **File/audio uploads** — the upload fields are wired in the UI; real storage needs the same backend/form service.
-4. **Order tracking & emails** — provided by the commerce platform (Shopify) or a service like Postmark for the aesthetic templates.
+1. **Payments** - the checkout button is a prototype confirmation. Integrate Stripe/Shopify/PayPal (Apple Pay & Google Pay come with Stripe/Shopify). Easiest path for this exact design: keep the front end and use **Shopify** headless or a **Stripe Payment Link / Checkout** per product.
+2. **Form delivery** - `custom-request.js` and the contact form currently store submissions in `localStorage` and open a prefilled email. For production, point them at a real endpoint (e.g. **Formspree**, **Basin**, or your own API). Search for `TODO` / `STUDIO_EMAIL` in `assets/request.js`.
+3. **File/audio uploads** - the upload fields are wired in the UI; real storage needs the same backend/form service.
+4. **Order tracking & emails** - provided by the commerce platform (Shopify) or a service like Postmark for the aesthetic templates.
 
 Replace `hello@inkwellandivy.example` (in `request.js` and `contact.html`) with your real inbox, and swap **Inkwell & Ivy** for your final brand name.

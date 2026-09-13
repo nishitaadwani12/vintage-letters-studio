@@ -3,7 +3,7 @@
 (function () {
   "use strict";
   const CART_KEY = "inkwell_cart_v1";
-  const money = (n) => "$" + Number(n).toFixed(2).replace(/\.00$/, "");
+  const money = (n) => "₹" + Number(n).toLocaleString("en-IN");
 
   // ---- Cart store (localStorage) ----
   const Cart = {
@@ -54,7 +54,7 @@
       <div class="footer-grid">
         <div>
           <span class="brand-name">Inkwell &amp; Ivy</span>
-          <p class="footer-tag">A handmade sentimental gifting studio — reviving the lost art of letter writing.</p>
+          <p class="footer-tag">A handmade sentimental gifting studio - reviving the lost art of letter writing.</p>
         </div>
         <div>
           <h4>Shop</h4>
@@ -78,7 +78,7 @@
       <div class="cart-head"><h3>Your Cart</h3><button id="cartClose" aria-label="Close cart">✕</button></div>
       <div class="cart-items" id="cartDrawerItems"></div>
       <div class="cart-foot">
-        <div class="cart-total">Total <span id="cartDrawerTotal">$0</span></div>
+        <div class="cart-total">Total <span id="cartDrawerTotal">₹0</span></div>
         <a class="btn btn-primary btn-block" href="cart.html">View Cart &amp; Checkout</a>
       </div>
     </aside>

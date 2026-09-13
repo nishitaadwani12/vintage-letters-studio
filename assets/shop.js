@@ -31,7 +31,7 @@
     });
     grid.innerHTML = items.length
       ? items.map(D.productCardHTML).join("")
-      : '<p class="no-results">No keepsakes match those filters yet — try clearing one.</p>';
+      : '<p class="no-results">No keepsakes match those filters yet - try clearing one.</p>';
   }
 
   function syncUrl() {
