@@ -1,5 +1,5 @@
 // Product catalog + shared config for Asli Tohfa.
-// Prices in INR. `emoji` stands in for product photography in this prototype.
+// Prices in INR. `emoji` is a small fallback icon; `img` holds the product photo.
 window.INKWELL = window.INKWELL || {};
 
 window.INKWELL.CATEGORIES = [

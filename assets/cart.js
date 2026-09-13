@@ -1,5 +1,5 @@
 // Cart & checkout page: full line items, gift options, order summary.
-// Checkout is a prototype confirmation - wire to a real payment provider for launch.
+// Checkout opens Razorpay via the /api serverless functions (see DEPLOY.md).
 (function () {
   "use strict";
   const D = window.INKWELL;
