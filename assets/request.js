@@ -5,7 +5,7 @@
   "use strict";
   const D = window.INKWELL;
   const STORE_KEY = "inkwell_requests_v1";
-  const STUDIO_EMAIL = "hello@aslitohfa.example"; // TODO: replace with your real inbox
+  const STUDIO_EMAIL = "aslitohfa@gmail.com";
 
   const form = document.getElementById("requestForm");
   const success = document.getElementById("success");
