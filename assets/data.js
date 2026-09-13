@@ -3,9 +3,15 @@
 window.INKWELL = window.INKWELL || {};
 
 window.INKWELL.CATEGORIES = [
-  { slug: "letters", name: "Vintage Letters & Bundles", emoji: "✉️", accent: "#6b1d2f" },
-  { slug: "flowers", name: "Pressed Flower Frames & Keepsakes", emoji: "🌸", accent: "#8a9a86" },
-  { slug: "boxes", name: "Interactive Gift Boxes & Jars", emoji: "🎁", accent: "#d4af37" },
+  { slug: "letters", name: "Vintage Letters & Bundles", emoji: "✉️", accent: "#6b1d2f",
+    kicker: "The Written Word",
+    tagline: "Hand-lettered on aged paper and closed with warm wax. The words they'll keep in a drawer and reread for years." },
+  { slug: "flowers", name: "Pressed Flower Frames & Keepsakes", emoji: "🌸", accent: "#8a9a86",
+    kicker: "Preserved in Bloom",
+    tagline: "Real botanicals dried, arranged and pressed behind glass. A moment held still, made to hang on a wall for a lifetime." },
+  { slug: "boxes", name: "Interactive Gift Boxes & Jars", emoji: "🎁", accent: "#b8891f",
+    kicker: "The Unboxing",
+    tagline: "Layered gift boxes and jars of little sealed notes, staged to be opened slowly, one delight at a time." },
 ];
 
 window.INKWELL.OCCASIONS = ["Anniversary", "Wedding", "Long Distance", "Birthday", "New Baby", "Just Because"];

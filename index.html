@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Asli Tohfa - Handmade Vintage Love Letters &amp; Keepsakes</title>
-  <meta name="description" content="Custom vintage love letters, wax-sealed keepsakes, and personalized romantic gifts. Handcrafted and delivered to your loved one." />
+  <title>Asli Tohfa - Handcrafted Gifts, Sealed with Meaning</title>
+  <meta name="description" content="Handmade gifts sealed with meaning - vintage letters, pressed flower frames, keepsake boxes and jars. Slow-crafted and delivered to your loved one." />
   <meta name="theme-color" content="#6b1d2f" />
-  <meta property="og:title" content="Asli Tohfa - Turn Your Words into Timeless Keepsakes" />
-  <meta property="og:description" content="Handmade vintage love letters, wax-sealed keepsakes & personalized romantic gifts." />
+  <meta property="og:title" content="Asli Tohfa - Handcrafted Gifts, Sealed with Meaning" />
+  <meta property="og:description" content="Handmade gifts - vintage letters, pressed flowers, keepsake boxes & jars. Gifts that are kept, not forgotten." />
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,30 +18,27 @@
   <div id="layout-top"></div>
 
   <main>
-    <!-- Hero -->
-    <section class="hero" id="top">
-      <canvas id="scene" aria-hidden="true"></canvas>
-      <div class="hero-overlay">
-        <p class="eyebrow">Asli Tohfa · Real Gifts, Made by Hand</p>
-        <h1 class="hero-title">Turn Your Words into<br /><em>Timeless Keepsakes.</em></h1>
-        <p class="hero-sub">Custom vintage love letters, wax-sealed by hand and pressed with dried flowers - the lost art of gifting, revived for the ones you love.</p>
+    <!-- Editorial hero -->
+    <section class="ed-hero" id="top">
+      <p class="ed-kicker">Asli Tohfa — Handcrafted Gifts, Sealed with Meaning</p>
+      <h1 class="ed-display">
+        <span class="ed-line"><span>Gifts That</span></span>
+        <span class="ed-line"><span>Are <em>Kept,</em></span></span>
+        <span class="ed-line"><span>Not Forgotten.</span></span>
+      </h1>
+      <div class="ed-rule"></div>
+      <div class="ed-hero-foot">
+        <p class="ed-lede">Letters, pressed flowers, keepsake boxes and jars — made slowly by hand for the moments that deserve more than a message.</p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="custom-request.html">Create Your Gift</a>
-          <a class="btn btn-ghost" href="shop.html">Shop the Collection</a>
+          <a class="btn btn-primary" href="shop.html">Shop the Collection</a>
+          <a class="btn btn-ghost" href="custom-request.html">Create Your Gift</a>
         </div>
-        <p class="hero-hint">Move your cursor to explore ✦</p>
       </div>
-      <div class="hero-fade"></div>
+      <div class="ed-scroll">Scroll <span>↓</span></div>
     </section>
 
-    <!-- Categories -->
-    <section class="section" id="collection">
-      <div class="section-head reveal">
-        <p class="eyebrow">The Collection</p>
-        <h2>Slow-crafted for every kind of love</h2>
-      </div>
-      <div class="cat-grid wrap reveal" id="catGrid"></div>
-    </section>
+    <!-- Category story sections (rendered by home.js) -->
+    <div id="stories"></div>
 
     <!-- How it works -->
     <section class="section how" id="how">
@@ -50,8 +47,8 @@
         <h2>Three steps to a keepsake</h2>
       </div>
       <div class="steps reveal">
-        <div class="step"><span class="step-num">01</span><h3>Choose Your Aesthetic</h3><p>Select your paper, ink and wax seal color.</p></div>
-        <div class="step"><span class="step-num">02</span><h3>Write Your Message</h3><p>Type your letter - or upload an audio clip.</p></div>
+        <div class="step"><span class="step-num">01</span><h3>Choose Your Gift</h3><p>Pick a keepsake or start a custom idea.</p></div>
+        <div class="step"><span class="step-num">02</span><h3>Make It Yours</h3><p>Add your words, colors, flowers or audio.</p></div>
         <div class="step"><span class="step-num">03</span><h3>We Handcraft &amp; Deliver</h3><p>Sealed by hand and sent to your loved one.</p></div>
       </div>
     </section>
@@ -66,37 +63,32 @@
     </section>
 
     <!-- Custom CTA banner -->
-    <section class="section how reveal" style="text-align:center">
+    <section class="ed-cta reveal">
       <p class="eyebrow">Something One-of-a-Kind</p>
-      <h2 style="font-size:clamp(1.9rem,4vw,3rem);margin-bottom:1rem">Have a gift idea all your own?</h2>
-      <p style="max-width:560px;margin:0 auto 1.8rem;color:var(--muted)">Tell us what you're dreaming up and we'll handcraft it from scratch - no product page required.</p>
-      <a class="btn btn-primary" href="custom-request.html">Start a Custom Gift Request</a>
+      <h2>Have a gift idea<br /><em>all your own?</em></h2>
+      <p class="ed-cta-sub">Tell us what you're dreaming up and we'll handcraft it from scratch — no product page required.</p>
+      <a class="btn btn-gold" href="custom-request.html">Start a Custom Gift Request</a>
     </section>
 
     <!-- Reviews -->
     <section class="section" id="reviews">
       <div class="section-head reveal">
-        <p class="eyebrow">Loved By Romantics</p>
+        <p class="eyebrow">Loved By Gift-Givers</p>
         <h2>Unboxing moments</h2>
       </div>
       <div class="review-grid wrap reveal">
-        <blockquote class="review"><div class="stars">★★★★★</div><p>"He cried opening it. The wax seal, the pressed flowers - it felt like a letter from another century."</p><cite> - Maya R., Anniversary gift</cite></blockquote>
-        <blockquote class="review"><div class="stars">★★★★★</div><p>"Long distance is hard. Getting a real letter I could hold made 4,000 miles feel like nothing."</p><cite> - Daniel &amp; Sofia</cite></blockquote>
-        <blockquote class="review"><div class="stars">★★★★★</div><p>"The QR audio add-on let me hear his voice reading it. Absolutely magical packaging."</p><cite> - Priya K., Birthday</cite></blockquote>
+        <blockquote class="review"><div class="stars">★★★★★</div><p>"He cried opening it. The wax seal, the pressed flowers - it felt like a gift from another century."</p><cite> - Maya R., Anniversary gift</cite></blockquote>
+        <blockquote class="review"><div class="stars">★★★★★</div><p>"Long distance is hard. Getting a real keepsake I could hold made 4,000 miles feel like nothing."</p><cite> - Daniel &amp; Sofia</cite></blockquote>
+        <blockquote class="review"><div class="stars">★★★★★</div><p>"The QR audio add-on let me hear his voice. Absolutely magical packaging."</p><cite> - Priya K., Birthday</cite></blockquote>
       </div>
     </section>
   </main>
 
   <div id="layout-bottom"></div>
 
-  <script type="importmap">{ "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-  } }</script>
   <script src="assets/data.js"></script>
   <script src="assets/layout.js"></script>
   <script src="assets/cards.js"></script>
-  <script type="module" src="assets/scene.js"></script>
   <script src="assets/home.js" defer></script>
 </body>
 </html>
