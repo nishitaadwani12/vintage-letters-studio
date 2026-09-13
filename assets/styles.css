@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@500;600&display=swap');
-
 :root {
   --cream: #fdfbf7;
   --parchment: #f4ead5;
@@ -78,8 +76,6 @@ main { min-height: 60vh; }
 .hero-overlay > *:nth-child(5) { animation-delay: 0.32s; }
 @keyframes heroRise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 .hero-overlay .btn, .hero-hint { pointer-events: auto; }
-.eyebrow-hi { color: var(--gold); }
-.eyebrow-hi [lang="hi"] { font-family: "Noto Serif Devanagari", serif; font-size: 1.05em; letter-spacing: 0.05em; }
 .hero-title { font-size: clamp(2.6rem, 6vw, 4.8rem); color: var(--burgundy); margin-bottom: 1rem; letter-spacing: 0.01em; text-shadow: 0 1px 0 rgba(255,255,255,0.5); }
 .hero-title em { color: var(--ink); }
 .hero-sub { font-size: 1.1rem; max-width: 470px; margin-bottom: 2rem; color: #4a4038; }

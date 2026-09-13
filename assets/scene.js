@@ -112,26 +112,34 @@ function triangle(x1, y1, x2, y2, x3, y3) {
   return g;
 }
 
-// Subtle debossed Devanagari monogram (अ) on the wax face.
+// Clean, modern wax emblem — no letters. Debossed concentric rings + a fine
+// gold accent line and a subtle starburst. Elegant and brand-neutral.
 function sealFace() {
   const S = 256;
   const c = document.createElement("canvas"); c.width = c.height = S;
   const g = c.getContext("2d");
   const cx = S / 2;
+  // Wax body with a soft top-left highlight.
   const grad = g.createRadialGradient(cx - 30, cx - 34, 12, cx, cx, cx);
-  grad.addColorStop(0, "#87293b"); grad.addColorStop(0.6, "#6b1d2f"); grad.addColorStop(1, "#551724");
+  grad.addColorStop(0, "#8a2a3c"); grad.addColorStop(0.6, "#6b1d2f"); grad.addColorStop(1, "#551724");
   g.fillStyle = grad; g.beginPath(); g.arc(cx, cx, cx - 4, 0, Math.PI * 2); g.fill();
-  g.strokeStyle = "rgba(40,10,16,0.4)"; g.lineWidth = 6;
-  g.beginPath(); g.arc(cx, cx, cx - 40, 0, Math.PI * 2); g.stroke();
-  const draw = () => {
-    g.textAlign = "center"; g.textBaseline = "middle";
-    g.font = "600 150px 'Noto Serif Devanagari', 'Cormorant Garamond', serif";
-    g.fillStyle = "rgba(34,9,15,0.45)"; g.fillText("अ", cx, cx + 12);
-    g.fillStyle = "rgba(255,225,200,0.10)"; g.fillText("अ", cx, cx + 8);
-  };
-  draw();
+  // Debossed outer ring.
+  g.strokeStyle = "rgba(40,10,16,0.45)"; g.lineWidth = 7;
+  g.beginPath(); g.arc(cx, cx, cx - 30, 0, Math.PI * 2); g.stroke();
+  // Fine gold accent ring.
+  g.strokeStyle = "rgba(212,175,55,0.5)"; g.lineWidth = 2.5;
+  g.beginPath(); g.arc(cx, cx, cx - 44, 0, Math.PI * 2); g.stroke();
+  // Subtle embossed starburst at center.
+  g.save(); g.translate(cx, cx);
+  for (let i = 0; i < 12; i++) {
+    g.rotate((Math.PI * 2) / 12);
+    g.strokeStyle = i % 2 ? "rgba(30,8,14,0.35)" : "rgba(255,225,200,0.10)";
+    g.lineWidth = 3;
+    g.beginPath(); g.moveTo(0, 14); g.lineTo(0, 40); g.stroke();
+  }
+  g.fillStyle = "rgba(30,8,14,0.4)"; g.beginPath(); g.arc(0, 0, 9, 0, Math.PI * 2); g.fill();
+  g.restore();
   const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { draw(); tex.needsUpdate = true; });
   return tex;
 }
 
