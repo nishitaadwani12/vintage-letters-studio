@@ -3,7 +3,7 @@
   "use strict";
   const D = window.INKWELL;
 
-  // Category story sections — alternating, scroll-revealed.
+  // Category story sections - alternating, scroll-revealed.
   const stories = document.getElementById("stories");
   if (stories) {
     stories.innerHTML = D.CATEGORIES.map((c, i) => {
@@ -11,7 +11,7 @@
       return `
       <section class="story${i % 2 ? " story-reverse" : ""} reveal" style="--accent:${c.accent}">
         <div class="story-media">
-          <span class="story-emoji" aria-hidden="true">${c.emoji}</span>
+          <img class="story-photo" src="${c.img}" alt="${c.name}" loading="lazy" />
         </div>
         <div class="story-text">
           <span class="story-num">${n}</span>

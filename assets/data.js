@@ -257,4 +257,39 @@ window.INKWELL.OPTIONS = {
   ],
 };
 
+// --- Reference photos (keyword-based free Flickr CC images via loremflickr) ---
+// Swap `p.img` / `c.img` for your own product photography before launch.
+window.INKWELL.photoURL = (kw, w, h, lock) =>
+  `https://loremflickr.com/${w}/${h}/${encodeURIComponent(kw)}?lock=${lock}`;
+
+const PHOTO_KW = {
+  "custom-vintage-letter": "letter,wax,seal",
+  "love-letter-bundle": "letters,vintage,ribbon",
+  "open-when-letters": "envelope,letters",
+  "reasons-i-love-you-deck": "love,notes,cards",
+  "long-distance-letter": "letter,envelope,vintage",
+  "pressed-flower-frame": "pressed,flowers,frame",
+  "birth-flower-frame": "flower,frame",
+  "star-map-frame": "night,sky,stars",
+  "flower-initial-keepsake": "dried,flowers",
+  "pressed-flower-bookmark": "bookmark,flowers",
+  "memory-jar": "mason,jar,notes",
+  "anniversary-time-capsule": "wooden,box,gift",
+  "vintage-gift-box": "gift,box,vintage",
+  "wedding-vow-keepsake": "wedding,flowers,frame",
+  "365-days-of-us-jar": "jar,paper,notes",
+  "scratch-date-night-box": "gift,box,cards",
+  "where-we-met-map": "vintage,map",
+  "newborn-keepsake-letter": "baby,keepsake,gift",
+  "remembrance-letter": "letter,candle,flowers",
+};
+const CAT_KW = { letters: "wax,seal,letter", flowers: "pressed,flowers,frame", boxes: "gift,box,ribbon" };
+
+window.INKWELL.PRODUCTS.forEach((p, i) => {
+  p.img = window.INKWELL.photoURL(PHOTO_KW[p.id] || p.category, 800, 600, i + 1);
+});
+window.INKWELL.CATEGORIES.forEach((c, i) => {
+  c.img = window.INKWELL.photoURL(CAT_KW[c.slug] || "gift", 900, 1100, 100 + i);
+});
+
 window.INKWELL.getProduct = (id) => window.INKWELL.PRODUCTS.find((p) => p.id === id);

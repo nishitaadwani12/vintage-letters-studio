@@ -6,7 +6,7 @@ window.INKWELL.productCardHTML = function (p) {
     <article class="product-card">
       <a class="product-thumb" href="product.html?id=${p.id}" aria-label="${p.name}">
         ${p.bestseller ? '<span class="badge">Best Seller</span>' : ""}
-        <span aria-hidden="true">${p.emoji}</span>
+        <img src="${p.img}" alt="${p.name}" loading="lazy" />
       </a>
       <div class="product-body">
         <h3>${p.name}</h3>

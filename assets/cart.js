@@ -7,9 +7,9 @@
   const root = document.getElementById("cartRoot");
   const SHIP = 79;
 
-  function emojiFor(name) {
+  function photoFor(name) {
     const p = D.PRODUCTS.find((x) => x.name === name);
-    return p ? p.emoji : "✉️";
+    return p ? p.img : "";
   }
 
   function render() {
@@ -27,7 +27,7 @@
         <div class="cart-list">
           ${items.map((i) => `
             <div class="cart-row">
-              <div class="thumb">${emojiFor(i.name)}</div>
+              <div class="thumb" style="background-image:url('${photoFor(i.name)}')"></div>
               <div class="info">
                 <h4>${i.name}</h4>
                 ${i.summary ? `<small>${i.summary}</small>` : ""}

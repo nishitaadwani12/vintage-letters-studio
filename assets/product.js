@@ -23,7 +23,7 @@
   function renderSimple() {
     pdp.innerHTML = `
       <div class="pdp-preview">
-        <div class="letter-preview"><div class="letter-paper" style="display:grid;place-items:center;font-size:6rem">${product.emoji}</div></div>
+        <img class="pdp-photo" src="${product.img}" alt="${product.name}" />
         <p class="preview-caption">Handmade to order</p>
       </div>
       <div class="pdp-config">
@@ -56,6 +56,7 @@
           </div>
         </div>
         <p class="preview-caption">Live preview · updates as you customize</p>
+        <img class="pdp-photo pdp-photo-sm" src="${product.img}" alt="${product.name}" loading="lazy" />
       </div>
       <div class="pdp-config">
         <p class="eyebrow">${catName(product.category)}</p>
