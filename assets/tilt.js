@@ -13,6 +13,13 @@
     if (bound.has(el)) return;
     bound.add(el);
     let raf = 0;
+    // A cursor-tracking light sweep (skipped on <img>, which can't hold children).
+    let glare = null;
+    if (el.tagName !== "IMG") {
+      glare = document.createElement("span");
+      glare.className = "tilt-glare";
+      el.appendChild(glare);
+    }
     el.addEventListener("pointermove", (e) => {
       const r = el.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width - 0.5;
@@ -21,11 +28,17 @@
       raf = requestAnimationFrame(() => {
         el.style.transform =
           `perspective(900px) rotateX(${(-py * MAX).toFixed(2)}deg) rotateY(${(px * MAX).toFixed(2)}deg) translateY(-6px) scale(1.02)`;
+        if (glare) {
+          glare.style.opacity = "1";
+          glare.style.background =
+            `radial-gradient(circle at ${((px + 0.5) * 100).toFixed(0)}% ${((py + 0.5) * 100).toFixed(0)}%, rgba(255,255,255,0.35), transparent 55%)`;
+        }
       });
     });
     el.addEventListener("pointerleave", () => {
       if (raf) cancelAnimationFrame(raf);
       el.style.transform = "";
+      if (glare) glare.style.opacity = "0";
     });
   }
 

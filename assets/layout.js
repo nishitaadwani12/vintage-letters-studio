@@ -84,12 +84,14 @@
     </aside>
     <div class="cart-scrim" id="cartScrim"></div>`;
 
+  const backTop = `<button class="back-top" id="backTop" aria-label="Back to top">↑</button>`;
+
   // ---- Inject ----
   document.addEventListener("DOMContentLoaded", () => {
     const mountTop = document.getElementById("layout-top");
     const mountBottom = document.getElementById("layout-bottom");
     if (mountTop) mountTop.innerHTML = nav;
-    if (mountBottom) mountBottom.innerHTML = footer + drawer;
+    if (mountBottom) mountBottom.innerHTML = footer + drawer + backTop;
 
     // Sticky nav shadow.
     const navEl = document.getElementById("nav");
@@ -112,7 +114,11 @@
     if (cartClose) cartClose.addEventListener("click", close);
     if (scrim) scrim.addEventListener("click", close);
 
-    document.addEventListener("cart:change", () => { renderBadge(); renderDrawer(); });
+    document.addEventListener("cart:change", () => {
+      renderBadge(); renderDrawer();
+      const b = document.getElementById("cartCount");
+      if (b) { b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); } // replay bump
+    });
     renderBadge();
 
     // Scroll reveal.
@@ -121,6 +127,22 @@
       { threshold: 0.1 }
     );
     document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    // Fade images in as they load (including dynamically-rendered cards).
+    const markLoaded = () => document.querySelectorAll("img").forEach((im) => { if (im.complete) im.classList.add("loaded"); });
+    markLoaded();
+    const reveal = (e) => { if (e.target.tagName === "IMG") e.target.classList.add("loaded"); };
+    document.addEventListener("load", reveal, true);
+    document.addEventListener("error", reveal, true); // never leave a broken image invisible
+    new MutationObserver(markLoaded).observe(document.body, { childList: true, subtree: true });
+
+    // Back-to-top.
+    const bt = document.getElementById("backTop");
+    if (bt) {
+      const tog = () => bt.classList.toggle("show", window.scrollY > 600);
+      window.addEventListener("scroll", tog, { passive: true }); tog();
+      bt.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    }
   });
 
   function renderBadge() {
