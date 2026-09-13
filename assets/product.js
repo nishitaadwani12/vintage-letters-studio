@@ -49,8 +49,10 @@
       <div class="pdp-preview">
         <div class="letter-preview">
           <div class="letter-paper" id="paper">
+            <p class="letter-date">${new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
             <p class="letter-body" id="preview">Write your message and watch it come to life…</p>
-            <div class="wax-seal" id="seal">♥</div>
+            <p class="letter-sign">With love,</p>
+            <div class="wax-seal" id="seal">&amp;</div>
           </div>
         </div>
         <p class="preview-caption">Live preview · updates as you customize</p>
@@ -104,7 +106,8 @@
       const b = e.target.closest(".dot"); if (!b) return;
       $("wax").querySelectorAll(".dot").forEach((c) => c.classList.remove("is-active"));
       b.classList.add("is-active"); state.wax = b.dataset.color;
-      seal.style.background = `radial-gradient(circle at 35% 30%, rgba(255,255,255,0.35), transparent 55%), ${state.wax}`;
+      const c = state.wax;
+      seal.style.background = `radial-gradient(circle at 38% 32%, color-mix(in srgb, ${c} 72%, white), ${c} 55%, color-mix(in srgb, ${c} 82%, black) 100%)`;
     });
     $("paperOpts").addEventListener("click", (e) => {
       const b = e.target.closest(".paper-chip"); if (!b) return;
