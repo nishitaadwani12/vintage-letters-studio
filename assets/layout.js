@@ -69,6 +69,13 @@
           <a href="contact.html">Contact</a>
           <a href="cart.html">Cart &amp; Checkout</a>
         </div>
+        <div>
+          <h4>Policies</h4>
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund.html">Refund &amp; Cancellation</a>
+          <a href="shipping.html">Shipping Policy</a>
+        </div>
       </div>
       <p class="footer-copy">© 2026 Asli Tohfa · Handcrafted with care</p>
     </footer>`;
