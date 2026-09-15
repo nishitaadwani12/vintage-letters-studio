@@ -7,7 +7,7 @@
   const D = window.ASLI;
   const STORE_KEY = "asli_requests_v1";
   // Paste your Formspree form ID below (create the form in the Formspree dashboard). See DEPLOY.md.
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xppzvvaw";
 
   const form = document.getElementById("requestForm");
   const success = document.getElementById("success");
