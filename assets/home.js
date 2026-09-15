@@ -1,7 +1,7 @@
 // Home page (editorial): full-bleed alternating category story sections + best-sellers.
 (function () {
   "use strict";
-  const D = window.INKWELL;
+  const D = window.ASLI;
 
   // Category story sections - alternating, scroll-revealed.
   const stories = document.getElementById("stories");

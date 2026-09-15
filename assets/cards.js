@@ -1,7 +1,7 @@
 // Shared product-card renderer used by home & shop pages.
-window.INKWELL = window.INKWELL || {};
-window.INKWELL.productCardHTML = function (p) {
-  const money = window.INKWELL.money || ((n) => "₹" + n);
+window.ASLI = window.ASLI || {};
+window.ASLI.productCardHTML = function (p) {
+  const money = window.ASLI.money || ((n) => "₹" + n);
   return `
     <article class="product-card tilt">
       <a class="product-thumb" href="product.html?id=${p.id}" aria-label="${p.name}">

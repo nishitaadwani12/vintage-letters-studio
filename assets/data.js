@@ -1,27 +1,27 @@
 // Product catalog + shared config for Asli Tohfa.
 // Prices in INR. `emoji` is a small fallback icon; `img` holds the product photo.
-window.INKWELL = window.INKWELL || {};
+window.ASLI = window.ASLI || {};
 
-window.INKWELL.CATEGORIES = [
+window.ASLI.CATEGORIES = [
   { slug: "letters", name: "Vintage Letters & Bundles", emoji: "✉️", accent: "#6b1d2f",
     kicker: "The Written Word",
     tagline: "Hand-lettered on aged paper and closed with warm wax. The words they'll keep in a drawer and reread for years." },
-  { slug: "flowers", name: "Pressed Flower Frames & Keepsakes", emoji: "🌸", accent: "#8a9a86",
+  { slug: "flowers", name: "Pressed Flower Keepsakes", emoji: "🌸", accent: "#8a9a86",
     kicker: "Preserved in Bloom",
-    tagline: "Real botanicals dried, arranged and pressed behind glass. A moment held still, made to hang on a wall for a lifetime." },
-  { slug: "boxes", name: "Interactive Gift Boxes & Jars", emoji: "🎁", accent: "#b8891f",
+    tagline: "Real botanicals dried and pressed behind glass. A moment held still, made to keep." },
+  { slug: "boxes", name: "Scrapbooks, Boxes & Jars", emoji: "🎁", accent: "#b8891f",
     kicker: "The Unboxing",
-    tagline: "Layered gift boxes and jars of little sealed notes, staged to be opened slowly, one delight at a time." },
+    tagline: "Hand-bound scrapbooks, layered gift boxes and jars of little sealed notes, made to be opened slowly." },
 ];
 
-window.INKWELL.OCCASIONS = ["Anniversary", "Wedding", "Long Distance", "Birthday", "New Baby", "Just Because"];
+window.ASLI.OCCASIONS = ["Anniversary", "Wedding", "Long Distance", "Birthday", "New Baby", "Just Because"];
 
-window.INKWELL.PRODUCTS = [
+window.ASLI.PRODUCTS = [
   {
     id: "custom-vintage-letter",
     name: "Custom Vintage Letter",
     category: "letters",
-    occasions: ["Anniversary", "Long Distance", "Just Because"],
+    occasions: ["Anniversary", "Wedding", "Long Distance", "Just Because"],
     price: 799,
     emoji: "✉️",
     bestseller: true,
@@ -87,39 +87,6 @@ window.INKWELL.PRODUCTS = [
     desc: "Ethically dried flowers arranged and pressed into a solid-wood frame, paired with a small calligraphy card. A keepsake for the wall or the mantel.",
   },
   {
-    id: "birth-flower-frame",
-    name: "Birth Flower Pressed Frame",
-    category: "flowers",
-    occasions: ["Birthday", "Just Because"],
-    price: 1399,
-    emoji: "🌷",
-    customizable: true,
-    blurb: "Their birth-month flower, pressed and framed with their name.",
-    desc: "We press the flower of their birth month and frame it with a hand-lettered name or date. A thoughtful, personal keepsake for birthdays and new beginnings.",
-  },
-  {
-    id: "star-map-frame",
-    name: "Custom Star Map & Letter Frame",
-    category: "flowers",
-    occasions: ["Anniversary", "Long Distance"],
-    price: 1599,
-    emoji: "✨",
-    customizable: true,
-    blurb: "The night sky of your special date, paired with a sealed note.",
-    desc: "Tell us the date and place that matters and we render the exact night sky, mount it with a hand-written note, and frame it. The stars, the way they were, the night it began.",
-  },
-  {
-    id: "flower-initial-keepsake",
-    name: "Floral Initial Keepsake",
-    category: "flowers",
-    occasions: ["Anniversary", "Birthday"],
-    price: 1299,
-    emoji: "🌿",
-    customizable: true,
-    blurb: "A monogram formed from real dried flowers.",
-    desc: "Choose an initial and we shape it from dried petals and stems, framed in glass. A personal botanical monogram for a shelf or desk.",
-  },
-  {
     id: "pressed-flower-bookmark",
     name: "Pressed Flower Bookmark Set",
     category: "flowers",
@@ -128,6 +95,18 @@ window.INKWELL.PRODUCTS = [
     emoji: "🔖",
     blurb: "A set of three laminated botanical bookmarks.",
     desc: "Three bookmarks, each with a different pressed bloom sealed in a whisper-thin laminate. Ships flat in a parchment sleeve.",
+  },
+  {
+    id: "memory-scrapbook",
+    name: "Handmade Memory Scrapbook",
+    category: "boxes",
+    occasions: ["Anniversary", "Wedding", "Birthday", "Just Because"],
+    price: 2799,
+    emoji: "📖",
+    bestseller: true,
+    customizable: true,
+    blurb: "A hand-bound scrapbook, laid out page by page with your photos and notes.",
+    desc: "We hand-assemble a vintage-style scrapbook from your photos, ticket stubs and words - each spread designed, captioned in calligraphy, and bound to be turned again and again. A keepsake of your whole story in one book.",
   },
   {
     id: "memory-jar",
@@ -156,24 +135,12 @@ window.INKWELL.PRODUCTS = [
     id: "vintage-gift-box",
     name: "Interactive Vintage Gift Box",
     category: "boxes",
-    occasions: ["Anniversary", "Birthday"],
+    occasions: ["Anniversary", "Wedding", "Birthday"],
     price: 1999,
     emoji: "🎁",
     customizable: true,
     blurb: "A layered unboxing: letter, flowers, wax seal & keepsake.",
     desc: "A curated wooden box that unfolds in layers - a sealed letter, a pressed-flower mini bouquet, and a keepsake trinket, staged for a filmable unboxing.",
-  },
-  {
-    id: "wedding-vow-keepsake",
-    name: "Wedding Vow Keepsake Frame",
-    category: "flowers",
-    occasions: ["Wedding", "Anniversary"],
-    price: 1899,
-    emoji: "💍",
-    bestseller: true,
-    customizable: true,
-    blurb: "Your vows, hand-lettered and framed with your wedding flowers.",
-    desc: "We hand-letter your vows onto aged paper, mount them with pressed flowers from your palette, and frame it in solid wood. Add a QR of your first-dance song to keep the day alive.",
   },
   {
     id: "365-days-of-us-jar",
@@ -187,26 +154,16 @@ window.INKWELL.PRODUCTS = [
     desc: "A full year of hand-rolled, wax-tied notes in a large apothecary jar - one to open each day. Our most heartfelt slow-gift, written from your prompts and memories.",
   },
   {
-    id: "scratch-date-night-box",
-    name: "Scratch-to-Reveal Date Night Box",
+    id: "custom-gift-hamper",
+    name: "Build-Your-Own Gift Hamper",
     category: "boxes",
-    occasions: ["Anniversary", "Birthday", "Just Because"],
-    price: 1099,
-    emoji: "🎟️",
+    occasions: ["Anniversary", "Wedding", "Birthday", "Just Because"],
+    price: 3499,
+    emoji: "🧺",
+    bestseller: true,
     customizable: true,
-    blurb: "Hand-made scratch cards hiding surprise dates and notes.",
-    desc: "A set of aged scratch-off cards, each concealing a date idea, a memory, or a love note you choose. Interactive, playful, and endlessly re-openable.",
-  },
-  {
-    id: "where-we-met-map",
-    name: "\"Where We Met\" Pressed Map",
-    category: "flowers",
-    occasions: ["Anniversary", "Long Distance"],
-    price: 1699,
-    emoji: "🗺️",
-    customizable: true,
-    blurb: "A hand-illustrated map of your place, pressed with flowers.",
-    desc: "Tell us the spot your story began and we hand-mark it on an antiqued map, press local-style blooms around it, and frame it with your date and note.",
+    blurb: "Pick two or more of our keepsakes, bundled into one vintage hamper.",
+    desc: "Choose any two or more gifts - a sealed letter, a pressed-flower frame, a memory jar, a scrapbook - and we arrange them into a single vintage hamper, wrapped with ribbon and a hand-written note. Tell us your picks and occasion in the customization notes.",
   },
   {
     id: "newborn-keepsake-letter",
@@ -214,8 +171,8 @@ window.INKWELL.PRODUCTS = [
     category: "letters",
     occasions: ["New Baby", "Just Because"],
     price: 999,
-    emoji: "🍼",
     customizable: true,
+    emoji: "🍼",
     blurb: "A first letter to a new arrival, sealed to open one day.",
     desc: "A hand-lettered welcome letter with the baby's name, birth details, and your words - wax-sealed to be kept and opened on a future birthday. A heirloom from day one.",
   },
@@ -233,7 +190,7 @@ window.INKWELL.PRODUCTS = [
 ];
 
 // Shared customization option sets (used on customizable PDPs and the request form).
-window.INKWELL.OPTIONS = {
+window.ASLI.OPTIONS = {
   fonts: [
     { id: "script", label: "Hand-written Calligraphy" },
     { id: "typewriter", label: "Vintage Typewriter" },
@@ -257,47 +214,16 @@ window.INKWELL.OPTIONS = {
   ],
 };
 
-// --- Reference photos (curated, subject-matched free photos via Unsplash) ---
-// Each ID was picked to match the actual gift type. Swap `p.img` / `c.img`
-// for your own product photography before launch.
-window.INKWELL.photoURL = (id, w, h) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&q=80&auto=format&fit=crop`;
-
-const PHOTO_ID = {
-  // Letters & notes — sealed envelopes, wax, handwriting.
-  "custom-vintage-letter": "1642069526127-75907e007187",
-  "love-letter-bundle": "1642069525937-ce9e8b24413a",
-  "open-when-letters": "1573046171778-f6506436ec62",
-  "reasons-i-love-you-deck": "1638607290333-a5702465d1f9",
-  "long-distance-letter": "1642069526127-75907e007187",
-  "newborn-keepsake-letter": "1573046171778-f6506436ec62",
-  "remembrance-letter": "1642069525937-ce9e8b24413a",
-  // Pressed flowers & framed keepsakes.
-  "pressed-flower-frame": "1775780307681-3340157a1d26",
-  "birth-flower-frame": "1644664575825-931a3a101279",
-  "flower-initial-keepsake": "1621264411684-b3ff856c1d49",
-  "pressed-flower-bookmark": "1631423020277-ee28d5912971",
-  "wedding-vow-keepsake": "1644664575825-931a3a101279",
-  "where-we-met-map": "1621264411684-b3ff856c1d49",
-  "star-map-frame": "1488866022504-f2584929ca5f",
-  // Boxes & jars.
-  "memory-jar": "1518745751685-7de700e56f72",
-  "365-days-of-us-jar": "1523292426375-339a4ba8e0bd",
-  "anniversary-time-capsule": "1610377507996-dcd4f0cfc125",
-  "vintage-gift-box": "1545844568-98bb15133ec0",
-  "scratch-date-night-box": "1592903297149-37fb25202dfa",
-};
-const CAT_ID = {
-  letters: "1642069526127-75907e007187",
-  flowers: "1775780307681-3340157a1d26",
-  boxes: "1545844568-98bb15133ec0",
-};
-
-window.INKWELL.PRODUCTS.forEach((p) => {
-  p.img = window.INKWELL.photoURL(PHOTO_ID[p.id] || CAT_ID[p.category], 800, 600);
+// --- Reference photos: locally-hosted, subject-matched placeholders ---
+// Each image lives in assets/img/<id>.jpg (and cat-<slug>.jpg for categories),
+// hand-picked and verified to match the gift. All are Creative-Commons
+// commercial-use licensed — see assets/img/CREDITS.md. Replace `p.img` / `c.img`
+// with your own product photography before launch.
+window.ASLI.PRODUCTS.forEach((p) => {
+  p.img = `assets/img/${p.id}.jpg`;
 });
-window.INKWELL.CATEGORIES.forEach((c) => {
-  c.img = window.INKWELL.photoURL(CAT_ID[c.slug], 900, 1100);
+window.ASLI.CATEGORIES.forEach((c) => {
+  c.img = `assets/img/cat-${c.slug}.jpg`;
 });
 
-window.INKWELL.getProduct = (id) => window.INKWELL.PRODUCTS.find((p) => p.id === id);
+window.ASLI.getProduct = (id) => window.ASLI.PRODUCTS.find((p) => p.id === id);

@@ -1,7 +1,7 @@
 // Shop page: filterable catalog by category + occasion, driven by ?cat= / ?occ=.
 (function () {
   "use strict";
-  const D = window.INKWELL;
+  const D = window.ASLI;
   const params = new URLSearchParams(location.search);
   const state = { cat: params.get("cat") || "all", occ: params.get("occ") || "all" };
 

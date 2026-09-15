@@ -1,12 +1,12 @@
 // Custom gift request form: populate options, validate, and submit.
-// Submits to Formspree if configured (real delivery to the studio inbox);
-// otherwise falls back to opening a prefilled email. See DEPLOY.md.
+// Submits to Formspree, which delivers to the studio's private inbox (that address
+// lives only in the Formspree dashboard, never in this code). Until it is configured,
+// submissions are kept as a local backup. See DEPLOY.md.
 (function () {
   "use strict";
-  const D = window.INKWELL;
-  const STORE_KEY = "inkwell_requests_v1";
-  const STUDIO_EMAIL = "aslitohfa@gmail.com";
-  // TODO: create a free form at formspree.io for aslitohfa@gmail.com and paste its ID.
+  const D = window.ASLI;
+  const STORE_KEY = "asli_requests_v1";
+  // Paste your Formspree form ID below (create the form in the Formspree dashboard). See DEPLOY.md.
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
 
   const form = document.getElementById("requestForm");
@@ -72,34 +72,14 @@
     } catch (_) {}
 
     if (!FORMSPREE_ENDPOINT.includes("YOUR_FORM_ID")) {
-      // Real delivery to the studio inbox, no page reload.
+      // Real delivery to the studio's private inbox via Formspree, no page reload.
+      // On a network error the local backup above is retained.
       fetch(FORMSPREE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({ _subject: "Custom gift request from " + data.name, ...data }),
-      }).catch(() => mailtoFallback(data));
-      return;
+      }).catch(() => {});
     }
-    mailtoFallback(data);
-  }
-
-  function mailtoFallback(data) {
-    const body = [
-      `Name: ${data.name}`,
-      `Email: ${data.email}`,
-      `Occasion: ${data.occasion || " - "}`,
-      `Recipient: ${data.recipient || " - "}`,
-      `Budget: ${data.budget || " - "}`,
-      `Delivery date: ${data.deliveryDate || " - "}`,
-      `Wax preference: ${data.waxPref || " - "}`,
-      `Paper preference: ${data.paperPref || " - "}`,
-      `Discreet shipping: ${data.discreet ? "Yes" : "No"}`,
-      "",
-      "Request:",
-      data.request,
-    ].join("\n");
-    const href = `mailto:${STUDIO_EMAIL}?subject=${encodeURIComponent("Custom gift request from " + data.name)}&body=${encodeURIComponent(body)}`;
-    window.open(href, "_blank");
   }
 
   function singleSelect(container, sel, onPick) {

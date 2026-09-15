@@ -40,7 +40,7 @@
       </div>
 
       <p style="text-align:center;color:var(--muted);margin-top:2rem">
-        Prefer email? <a href="mailto:aslitohfa@gmail.com" style="color:var(--burgundy);font-weight:600">aslitohfa@gmail.com</a>
+        We read every message and reply within 1-2 business days.
       </p>
     </section>
   </main>
@@ -50,7 +50,8 @@
   <script src="assets/layout.js"></script>
   <script>
     (function () {
-      // TODO: paste your Formspree form ID (create one for aslitohfa@gmail.com). See DEPLOY.md.
+      // Formspree delivers submissions to the studio's private inbox, which is set
+      // only in the Formspree dashboard (never in this code). Paste the form ID below. See DEPLOY.md.
       var FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
       var form = document.getElementById("contactForm");
       var ok = document.getElementById("cSuccess");
@@ -65,9 +66,9 @@
           return;
         }
         try {
-          var all = JSON.parse(localStorage.getItem("inkwell_contact_v1")) || [];
+          var all = JSON.parse(localStorage.getItem("asli_contact_v1")) || [];
           all.push(Object.assign({}, d, { at: new Date().toISOString() }));
-          localStorage.setItem("inkwell_contact_v1", JSON.stringify(all));
+          localStorage.setItem("asli_contact_v1", JSON.stringify(all));
         } catch (_) {}
         if (FORMSPREE_ENDPOINT.indexOf("YOUR_FORM_ID") === -1) {
           fetch(FORMSPREE_ENDPOINT, {
@@ -75,8 +76,7 @@
             headers: { "Content-Type": "application/json", Accept: "application/json" },
             body: JSON.stringify(Object.assign({ _subject: "Contact from " + d.name }, d)),
           }).catch(function () {
-            window.open("mailto:aslitohfa@gmail.com?subject=" + encodeURIComponent("Contact from " + d.name) +
-              "&body=" + encodeURIComponent(d.message + "\n\nFrom: " + d.name + " (" + d.email + ")"), "_blank");
+            // Network error: the submission is already kept in localStorage as a backup.
           });
         }
         form.style.display = "none";

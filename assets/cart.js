@@ -2,7 +2,7 @@
 // Checkout opens Razorpay via the /api serverless functions (see DEPLOY.md).
 (function () {
   "use strict";
-  const D = window.INKWELL;
+  const D = window.ASLI;
   const money = D.money;
   const root = document.getElementById("cartRoot");
   const SHIP = 79;
@@ -117,10 +117,10 @@
             render();
             alert("Payment successful! Thank you — we'll email you shortly to craft your order.");
           } else {
-            alert("We couldn't verify the payment. If money was deducted, email aslitohfa@gmail.com and we'll sort it out.");
+            alert("We couldn't verify the payment. If money was deducted, please reach us via the Contact page and we'll sort it out.");
           }
         } catch (_) {
-          alert("Payment received, but verification hit a snag. Please email aslitohfa@gmail.com.");
+          alert("Payment received, but verification hit a snag. Please reach us via the Contact page.");
         }
       },
       modal: { ondismiss: () => { btn.disabled = false; renderCheckoutBtn(); } },

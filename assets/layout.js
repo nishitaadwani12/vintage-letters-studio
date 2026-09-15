@@ -2,7 +2,7 @@
 // Injects the nav, footer, and cart drawer, and manages a localStorage cart.
 (function () {
   "use strict";
-  const CART_KEY = "inkwell_cart_v1";
+  const CART_KEY = "asli_cart_v1";
   const money = (n) => "₹" + Number(n).toLocaleString("en-IN");
 
   // ---- Cart store (localStorage) ----
@@ -25,9 +25,9 @@
     count() { return this.read().length; },
     total() { return this.read().reduce((s, i) => s + Number(i.price || 0), 0); },
   };
-  window.INKWELL = window.INKWELL || {};
-  window.INKWELL.Cart = Cart;
-  window.INKWELL.money = money;
+  window.ASLI = window.ASLI || {};
+  window.ASLI.Cart = Cart;
+  window.ASLI.money = money;
 
   // ---- Markup ----
   const nav = `

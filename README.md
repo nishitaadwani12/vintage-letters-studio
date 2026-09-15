@@ -81,8 +81,8 @@ python3 -m http.server 8000
 This is a fully-built **front end**. To transact real money and capture orders you need a backend - pick one:
 
 1. **Payments** - the checkout button is a prototype confirmation. Integrate Stripe/Shopify/PayPal (Apple Pay & Google Pay come with Stripe/Shopify). Easiest path for this exact design: keep the front end and use **Shopify** headless or a **Stripe Payment Link / Checkout** per product.
-2. **Form delivery** - `custom-request.js` and the contact form currently store submissions in `localStorage` and open a prefilled email. For production, point them at a real endpoint (e.g. **Formspree**, **Basin**, or your own API). Search for `TODO` / `STUDIO_EMAIL` in `assets/request.js`.
+2. **Form delivery** - the contact and custom-request forms keep a local backup and deliver via **Formspree**. Set the `FORMSPREE_ENDPOINT` in `assets/request.js` and `contact.html` (see `DEPLOY.md`). The destination inbox is configured in the Formspree dashboard only — never hardcoded in the site.
 3. **File/audio uploads** - the upload fields are wired in the UI; real storage needs the same backend/form service.
-4. **Order tracking & emails** - provided by the commerce platform (Shopify) or a service like Postmark for the aesthetic templates.
+4. **Order tracking & emails** - Razorpay emails you on each payment; add a webhook + email service later for branded confirmations.
 
-Replace `hello@aslitohfa.example` (in `request.js` and `contact.html`) with your real inbox, and swap **Asli Tohfa** for your final brand name.
+No email address is stored in the site code or page source. Set your inbox in the Formspree and Razorpay dashboards. Swap **Asli Tohfa** for your final brand name if it changes.

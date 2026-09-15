@@ -1,7 +1,7 @@
 // Product detail page: renders a product, and (if customizable) a live customizer.
 (function () {
   "use strict";
-  const D = window.INKWELL;
+  const D = window.ASLI;
   const money = D.money;
   const pdp = document.getElementById("pdp");
   const id = new URLSearchParams(location.search).get("id");

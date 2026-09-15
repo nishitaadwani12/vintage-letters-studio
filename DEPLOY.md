@@ -40,13 +40,14 @@ That's it — the Checkout button now opens the secure Razorpay UPI/card window,
 So the **Custom Gift Request** and **Contact** forms reach your inbox with no server:
 
 1. Sign up at [formspree.io](https://formspree.io) (free tier = 50 submissions/mo).
-2. Create a form pointing to **aslitohfa@gmail.com**. Copy its endpoint, e.g. `https://formspree.io/f/abcd1234`.
-3. Paste that endpoint (replace `YOUR_FORM_ID`) in **two** places:
+2. Create a form and set its **destination inbox** to your private studio Gmail.
+   > Privacy: that address is entered **only in the Formspree dashboard** — never in this repo or the site's page source, so it stays hidden from visitors and web scrapers.
+3. Copy the form endpoint (e.g. `https://formspree.io/f/abcd1234`) and paste it (replacing `YOUR_FORM_ID`) in **two** places:
    - `assets/request.js` → `FORMSPREE_ENDPOINT`
    - `contact.html` → `FORMSPREE_ENDPOINT`
 4. Commit + push — Vercel auto-redeploys.
 
-Until you do this, forms fall back to opening a pre-filled email to aslitohfa@gmail.com.
+Until you do this, form submissions are validated and kept as a local backup in the visitor's browser, but are **not delivered** — so configure Formspree before launch.
 
 ---
 
