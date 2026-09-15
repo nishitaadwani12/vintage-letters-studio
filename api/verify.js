@@ -23,7 +23,10 @@ module.exports = async (req, res) => {
       .createHmac("sha256", secret)
       .update(razorpay_order_id + "|" + razorpay_payment_id)
       .digest("hex");
-    const ok = expected === razorpay_signature;
+    // Constant-time comparison to avoid leaking signature bytes via timing.
+    const expBuf = Buffer.from(expected, "utf8");
+    const sigBuf = Buffer.from(String(razorpay_signature), "utf8");
+    const ok = expBuf.length === sigBuf.length && crypto.timingSafeEqual(expBuf, sigBuf);
     res.status(ok ? 200 : 400).json({ ok });
   } catch (err) {
     res.status(400).json({ ok: false, error: "Verification failed" });
