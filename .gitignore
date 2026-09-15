@@ -7,3 +7,5 @@ node_modules/
 # Local Amazon/Brazil workspace metadata (not part of the site)
 packageInfo
 .builder-mcp/
+.vercel
+.env*
